@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1517328754987172963}
   - component: {fileID: 1517328754987172964}
   - component: {fileID: 1517328754987172965}
-  - component: {fileID: 4266463685910165506}
+  - component: {fileID: 4959842091143603005}
   m_Layer: 0
   m_Name: Ainz
   m_TagString: Untagged
@@ -97,7 +97,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.59, y: 12.8, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4266463685910165506
+--- !u!114 &4959842091143603005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,3 +109,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcdabf2dfde15274594d2ef7f3a85442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
