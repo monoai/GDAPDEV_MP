@@ -31,19 +31,9 @@ public class Weapon : MonoBehaviour
         fireRate -= Time.deltaTime;
     }
 
-    void OnTriggerEnter2D (Collider2D hitInfo)
-    {
-        Debug.Log("Hit" + hitInfo.name);
-        //Enemy enemy = hitInfo.GetComponent<Enemy>();
-        //if (enemy != null)
-        //{
-        //    enemy.TakeDamage(damage, weaponType);
-        //}
-    }
-
     void Shoot()
     {
-        Debug.Log("Shooting!" + "Bullet Type:" + this.bulletType);
+        //Debug.Log("Shooting!" + "Bullet Type:" + this.bulletType);
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 }

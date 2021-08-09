@@ -13,6 +13,21 @@ public class Bullet : MonoBehaviour
         body.velocity = transform.up * speed;
     }
 
+    void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        if (hitInfo.name == "Enemy")
+        {
+            Debug.Log("Hit" + hitInfo.name);
+            Destroy(gameObject);
+        }
+
+        Enemy enemy = hitInfo.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(FindObjectOfType<Weapon>().damage, FindObjectOfType<Weapon>().bulletType.ToString());
+        }
+    }
+
     void OnBecameInvisible()
     {
         enabled = false;
