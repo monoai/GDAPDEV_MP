@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
+    Vector3 initTouchPos = new Vector3(0,0,0);
 
     void Start()
     {
@@ -19,10 +20,15 @@ public class PlayerMovement : MonoBehaviour
         {
             Touch t = Input.GetTouch(0);
             //Debug.Log($"Finger state: {t.phase}");
-            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(t.position);
-            touchPosition.z = 0f;
-            //Vector3 newPosition = touchPosition - transform.position;
-            transform.position = touchPosition;
+            if(t.phase == TouchPhase.Began){
+                initTouchPos = Camera.main.ScreenToWorldPoint(t.position);
+            }
+            Vector3 touchPos = Camera.main.ScreenToWorldPoint(t.position);
+            //Debug.Log("TouchPos" + (touchPos - initTouchPos));
+            touchPos.z = 0f;
+            Vector3 newPosition = (touchPos - initTouchPos);
+            //transform.position += newPosition; //New Movement Formula (Needs Refinement)
+            transform.position = touchPos;
             /*
             if(t.phase != TouchPhase.Ended)
             {
