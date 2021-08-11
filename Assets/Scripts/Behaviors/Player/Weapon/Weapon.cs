@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     [HeaderAttribute("Bullet Object")]
     public Transform firePoint;
     public GameObject bulletPrefab;
+
     [Header("Bullet Information")]
     public bulletTypeEnum bulletType;
     public enum bulletTypeEnum {Red, Blue, Yellow};
