@@ -10,7 +10,7 @@ public class DebugScript : MonoBehaviour
     float nextTimeToSearch = 0;
 
     public void damagePlayer() {
-        Player.GetComponent<PlayerMovement>().DamagePlayer(20);
+        Player.GetComponent<Player>().DamagePlayer(20);
         Debug.Log("DIE PLAYEERR");
     }
 

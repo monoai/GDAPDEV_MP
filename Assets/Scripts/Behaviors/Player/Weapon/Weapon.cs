@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+
     [HeaderAttribute("Bullet Object")]
     public Transform firePoint;
     public GameObject bulletPrefab;
@@ -12,24 +13,22 @@ public class Weapon : MonoBehaviour
     public bulletTypeEnum bulletType;
     public enum bulletTypeEnum {Red, Blue, Yellow};
     public int damage;
-    public float fireRate;
-
-    private float maxFireRate;
 
     void Start()
     {
-        maxFireRate = fireRate;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(fireRate < 0.0) {
+        var stats = PlayerStats.instance;
+        if(stats.fireRate < 0.0) {
             Shoot();
-            fireRate = maxFireRate;
+            stats.fireRate = stats.maxFireRate;
         }
         //fireRate -= (float)(Time.deltaTime * 2.0);
-        fireRate -= Time.deltaTime;
+        stats.fireRate -= Time.deltaTime;
     }
 
     void Shoot()

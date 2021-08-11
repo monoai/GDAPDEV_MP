@@ -13,20 +13,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-
-    [System.Serializable]
-    public class PlayerStats2 {
-        public int Health = 100;
-    }
-
-    public PlayerStats2 playerStats = new PlayerStats2();
-
     void Update()
     {
+        /*
         if(Input.GetKeyDown("space")) {
             this.DamagePlayer(20);
             Debug.Log("DIE PLAYEERR");
         }
+        */
 
         int touchCount = Input.touchCount;
         if(touchCount > 0)
@@ -60,13 +54,6 @@ public class PlayerMovement : MonoBehaviour
                 //nothing
             }
             */
-        }
-    }
-
-    public void DamagePlayer(int damage) {
-        playerStats.Health -= damage;
-        if(playerStats.Health <= 0) {
-            GameMaster.KillPlayer(this);
         }
     }
 }

@@ -6,6 +6,25 @@ public class GameMaster : MonoBehaviour
 {
 
     public static GameMaster gm;
+
+    void Awake() {
+        //screenSize = new Vector3(Screen.height, Screen.width, 0);
+        if(gm == null) {
+            gm = this;
+        }
+    }
+
+    [SerializeField]
+    private int maxLives = 3;
+    private static int _remainingLives;
+    public static int RemainingLives {
+        get { return _remainingLives; }
+    }
+
+    [SerializeField]
+    private int startingMoney;
+    public static int Money;
+
     public Transform playerPrefab;
     public int spawnDelay;
 
@@ -23,14 +42,15 @@ public class GameMaster : MonoBehaviour
     //public Vector3 spawnPos;
     //public Quaternion rotation;
 
-
-
     void Start() {
-        //screenSize = new Vector3(Screen.height, Screen.width, 0);
+        _remainingLives = maxLives;
+        Money = startingMoney;
+    }
 
-        if(gm == null) {
-            gm = this;
-        }
+    public void EndGame()
+    {
+        //Anything Game Over related here
+        //GameOver UI here
     }
 
     public IEnumerator RespawnPlayer() {
@@ -39,8 +59,23 @@ public class GameMaster : MonoBehaviour
         Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 
-    public static void KillPlayer (PlayerMovement player) {
+    public static void KillPlayer (Player player) {
         Destroy (player.gameObject);
-        gm.StartCoroutine(gm.RespawnPlayer());
+        _remainingLives -= 1;
+        if(_remainingLives <= 0) {
+            gm.EndGame();
+        } else {
+            gm.StartCoroutine(gm.RespawnPlayer());
+        }
     }
+
+    /* If we ever need to kill enemies through the GM instead
+    public static void killEnemy(Enemy enemy) {
+        gm.killEnemyActual(enemy);
+    }
+
+    public void killEnemyActual(Enemy _enemy) {
+        Destroy(_enemy.gameObject);
+    }
+    */
 }

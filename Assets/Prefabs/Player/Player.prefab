@@ -92,9 +92,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1516885454333362282}
   - component: {fileID: 1516885454333362277}
+  - component: {fileID: 1883194063452661303}
   - component: {fileID: 1516885454333362283}
   - component: {fileID: 1516885454333362276}
-  - component: {fileID: 1516885454333362278}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -134,6 +134,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
   m_Radius: 0.37
+--- !u!114 &1883194063452661303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516885454333362281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26c5f22497e95f24a8e8002fc214e634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1516885454333362283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,19 +177,6 @@ MonoBehaviour:
   bulletType: 0
   damage: 10
   fireRate: 0.5
---- !u!114 &1516885454333362278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516885454333362281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baeaa9d18bbd9134191359d1f96be601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
 --- !u!1 &1516885455687872212
 GameObject:
   m_ObjectHideFlags: 0
