@@ -14,20 +14,12 @@ public class GameMaster : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private int maxLives = 3;
-    private static int _remainingLives;
-    public static int RemainingLives {
-        get { return _remainingLives; }
-    }
-
-    [SerializeField]
-    private int startingMoney;
-    public static int Money;
-
+    [Header("Player Prefab")]
     public Transform playerPrefab;
-    public int spawnDelay;
 
+    [Header("Spawn Information")]
+    public int spawnDelay;
+    //-----------------
     public Transform spawnPoint;
     /*
     This is a temporary variable
@@ -41,6 +33,19 @@ public class GameMaster : MonoBehaviour
     //public Vector3 screenSize;
     //public Vector3 spawnPos;
     //public Quaternion rotation;
+    //-----------------
+
+    [SerializeField]
+    [Header("Player Resources")]
+    private int maxLives = 3;
+    private static int _remainingLives;
+    public static int RemainingLives {
+        get { return _remainingLives; }
+    }
+
+    [SerializeField]
+    private int startingMoney;
+    public static int Money;
 
     void Start() {
         _remainingLives = maxLives;
