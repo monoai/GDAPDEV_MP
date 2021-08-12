@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 640730200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.70410156, y: -3.6068726, z: 7.652627}
+  m_LocalPosition: {x: -0.28, y: -3.6068726, z: 7.652627}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8480698357162643483}
@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 8480698357162643483}
   - component: {fileID: 8480698357162643480}
   - component: {fileID: 1970408437}
+  - component: {fileID: 452507678}
   m_Layer: 0
   m_Name: GM
   m_TagString: Untagged
@@ -75,11 +76,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc4ac606ec070541b76856153581703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLives: 3
-  startingMoney: 0
   playerPrefab: {fileID: 1516885454333362282, guid: 95ae1c387fd37f745ad561c710e56b46, type: 3}
   spawnDelay: 2
   spawnPoint: {fileID: 640730201}
+  maxLives: 3
+  startingMoney: 0
 --- !u!114 &1970408437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,3 +96,30 @@ MonoBehaviour:
   maxHealth: 100
   maxFireRate: 0.5
   fireRate: 0
+  maxDamage: 20
+--- !u!114 &452507678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480698357162643481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2dc13ea6cf335b45a83eb4f27fe70ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - name: TestWave
+    enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
+    count: 3
+    rate: 1
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  timeBetweenWaves: 5
+  state: 2
