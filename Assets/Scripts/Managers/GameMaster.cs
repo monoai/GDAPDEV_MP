@@ -54,6 +54,7 @@ public class GameMaster : MonoBehaviour
 
     public void EndGame()
     {
+        Debug.Log("Game Over!");
         //Anything Game Over related here
         //GameOver UI here
     }

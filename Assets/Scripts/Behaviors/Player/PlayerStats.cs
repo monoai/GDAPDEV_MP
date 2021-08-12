@@ -20,6 +20,8 @@ public class PlayerStats : MonoBehaviour
     public float maxFireRate = 0.5f;
     public float fireRate;
 
+    public int maxDamage = 10;
+
     void Awake() {
         if(instance == null) {
             instance = this;

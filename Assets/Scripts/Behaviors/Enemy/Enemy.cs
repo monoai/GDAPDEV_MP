@@ -6,22 +6,24 @@ public class Enemy : MonoBehaviour
 {
     public int health = 100;
 
-    public void TakeDamage (int damage, string weaponType)
-    {
-        //Testing weaponType enum 
+    public void TakeDamage (int damage, Weapon.weaponTypeEnum weaponType) {
+        //Testing weaponType enum
         //Note: WORKS but this code overwrites damage for now
-        switch (weaponType)
-        {
-            case "Red": damage = 25; break;
-            case "Blue": damage = 50; break;
-            case "Yellow": damage = 100; break;
+        float multiplier = 1.0f;
+
+        switch (weaponType) {
+            case Weapon.weaponTypeEnum.Red: multiplier = 1.0f;
+            Debug.Log("Got hit with Red"); break;
+            case Weapon.weaponTypeEnum.Blue: multiplier = 0.8f;
+            Debug.Log("Got hit with Blue"); break;
+            case Weapon.weaponTypeEnum.Yellow: multiplier = 0.5f;
+            Debug.Log("Got hit with Yellow"); break;
         }
-        
 
-        health -= damage;
 
-        if (health <= 0)
-        {
+        health -= (int)(damage * multiplier);
+
+        if (health <= 0) {
             Die();
         }
     }

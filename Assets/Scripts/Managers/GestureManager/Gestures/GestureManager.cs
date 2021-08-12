@@ -35,7 +35,7 @@ public class GestureManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -54,7 +54,7 @@ public class GestureManager : MonoBehaviour
                 endPoint = trackedFinger1.position;
 
                 // Tap Events
-                if (gestureTime <= _tapProperty.tapTime && 
+                if (gestureTime <= _tapProperty.tapTime &&
                     Vector2.Distance(startPoint, endPoint) < (Screen.dpi * _tapProperty.tapMaxDistance))
                 {
                     FireTapEvent(startPoint);
