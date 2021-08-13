@@ -9,7 +9,12 @@ public class DataManager : MonoBehaviour
     [SerializeField]
     [Header("Player Resources")]
     public int maxLives = 3;
+    public int maxHealth = 100;
     public int Money;
+
+    [Header("Player Stats")]
+    public float maxFireRate = 0.5f;
+    public int maxDamage = 10;
 
     void Awake() {
         if(data == null) {

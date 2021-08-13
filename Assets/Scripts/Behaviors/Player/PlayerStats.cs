@@ -4,7 +4,7 @@ public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats instance;
 
-    public int maxHealth = 100;
+    public int maxHealth = DataManager.data.maxHealth;
 
     private int _curHealth;
     public int curHealth
@@ -17,10 +17,10 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public float maxFireRate = 0.5f;
+    public float maxFireRate = DataManager.data.maxFireRate;
     public float fireRate;
 
-    public int maxDamage = 10;
+    public int maxDamage = DataManager.data.maxDamage;
 
     void Awake() {
         if(instance == null) {
