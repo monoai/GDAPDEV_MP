@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
@@ -11,7 +12,11 @@ public class GameMaster : MonoBehaviour
         //screenSize = new Vector3(Screen.height, Screen.width, 0);
         if(gm == null) {
             gm = this;
+        } else if (gm != this) {
+            Destroy(gameObject);
         }
+
+        //DontDestroyOnLoad(gameObject);
     }
 
     [Header("Player Prefab")]
@@ -37,15 +42,10 @@ public class GameMaster : MonoBehaviour
 
     [SerializeField]
     [Header("Player Resources")]
-    private int maxLives = 3;
     private static int _remainingLives;
     public static int RemainingLives {
         get { return _remainingLives; }
     }
-
-    [SerializeField]
-    private int startingMoney;
-    public static int Money;
 
     [SerializeField]
     private int startingScore;
@@ -57,10 +57,36 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private GameObject gameWonUI;
 
+    //For counting purposes
+    private float timeInterval = 1f;
+
+    private WaveSpawner waveSpawn;
+
     void Start() {
-        _remainingLives = maxLives;
-        Money = startingMoney;
+        waveSpawn = GetComponent<WaveSpawner>();
+        _remainingLives = DataManager.data.maxLives;
         Score = startingScore;
+    }
+
+    void Update() {
+        timeInterval -= Time.deltaTime;
+        if(timeInterval <= 0f) {
+            timeInterval = 1f;
+            if(validScene()) {
+                waveSpawn.enabled = true;
+            } else {
+                waveSpawn.enabled = false;
+            }
+        }
+    }
+
+    bool validScene() {
+        Scene scene = SceneManager.GetActiveScene();
+        if(scene.name != "Lobby Scene" && scene.name != "Main Menu") {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void gameOver()
@@ -71,6 +97,7 @@ public class GameMaster : MonoBehaviour
 
     public void gameEnd(){
         Debug.Log("Game ended!");
+        DataManager.data.Money += 3;
         gameWonUI.SetActive(true);
     }
 

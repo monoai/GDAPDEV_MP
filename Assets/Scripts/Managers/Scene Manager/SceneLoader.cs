@@ -29,6 +29,12 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadLevel(0));
     }
 
+    //Temporary function for Beta.
+    public void LoadLevelOne()
+    {
+        StartCoroutine(LoadLevel(2));
+    }
+
     public void LoadNextLevel()
     {
         if (SceneManager.GetActiveScene().buildIndex != SceneManager.GetAllScenes().Length)

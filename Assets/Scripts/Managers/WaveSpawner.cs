@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -29,17 +30,20 @@ public class WaveSpawner : MonoBehaviour
 
     private GameMaster gm;
 
+    void Awake() {
+    }
+
     void Start() {
         if(spawnPoints.Length == 0 ) {
             Debug.LogError("No Spawn Points, please add one.");
         }
 
         waveCountdown = timeBetweenWaves;
-        gm = GetComponent<GameMaster>();
     }
 
     void Update() {
         if(state == SpawnState.Finished) {
+            state = SpawnState.Counting;
             gm.gameEnd();
             return;
         }
