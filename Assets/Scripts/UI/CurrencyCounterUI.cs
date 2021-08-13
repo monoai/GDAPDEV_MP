@@ -4,13 +4,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class CurrencyCounterUI : MonoBehaviour
 {
-    private Text scoreText;
+    private Text currencyText;
 
     void Awake() {
-        scoreText = GetComponent<Text>();
+        currencyText = GetComponent<Text>();
     }
 
     void Update() {
-        scoreText.text = "Currency: " + DataManager.data.Money.ToString("D2");
+        currencyText.text = "Currency: " + DataManager.data.Money.ToString("D2");
     }
 }
