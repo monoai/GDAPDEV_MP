@@ -5,7 +5,7 @@ using UnityEngine;
 public class UpgradeHandler : MonoBehaviour
 {
     public void lifeUpg() {
-        if(DataManager.data.Money == 1) {
+        if(DataManager.data.Money >= 1) {
             DataManager.data.Money -= 1;
             DataManager.data.maxLives += 1;
         } else {
@@ -14,7 +14,7 @@ public class UpgradeHandler : MonoBehaviour
     }
 
     public void dmgUpg() {
-        if(DataManager.data.Money == 1) {
+        if(DataManager.data.Money >= 1) {
             DataManager.data.Money -= 1;
             DataManager.data.maxDamage += 5;
         } else {
@@ -23,9 +23,9 @@ public class UpgradeHandler : MonoBehaviour
     }
 
     public void fireRateUpg() {
-        if(DataManager.data.Money == 1) {
+        if(DataManager.data.Money >= 1) {
             DataManager.data.Money -= 1;
-            DataManager.data.maxFireRate += 0.5f;
+            DataManager.data.maxFireRate -= 0.05f;
         } else {
             Debug.Log("Not enough money");
         }

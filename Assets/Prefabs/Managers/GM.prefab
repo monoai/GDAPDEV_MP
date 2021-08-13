@@ -79,8 +79,6 @@ MonoBehaviour:
   playerPrefab: {fileID: 1516885454333362282, guid: 95ae1c387fd37f745ad561c710e56b46, type: 3}
   spawnDelay: 2
   spawnPoint: {fileID: 640730201}
-  maxLives: 3
-  startingMoney: 0
   startingScore: 0
   gameOverUI: {fileID: 0}
   gameWonUI: {fileID: 0}
@@ -96,10 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baeaa9d18bbd9134191359d1f96be601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  maxFireRate: 0.5
+  maxHealth: 0
+  maxFireRate: 0
   fireRate: 0
-  maxDamage: 20
+  maxDamage: 0
 --- !u!114 &452507678
 MonoBehaviour:
   m_ObjectHideFlags: 0

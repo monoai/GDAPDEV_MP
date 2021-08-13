@@ -39,6 +39,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         waveCountdown = timeBetweenWaves;
+        gm = GetComponent<GameMaster>();
     }
 
     void Update() {

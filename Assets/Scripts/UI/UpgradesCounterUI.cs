@@ -12,16 +12,13 @@ public class UpgradesCounterUI : MonoBehaviour
 
     void Awake()
     {
-        currLivesText = GetComponent<Text>();
-        currDmgText = GetComponent<Text>();
-        currFireRateText = GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
         currLivesText.text = "Current Lives: " + DataManager.data.maxLives.ToString("D2");
-        currLivesText.text = "Current Damage: " + DataManager.data.maxDamage.ToString("D2");
-        currLivesText.text = "Current Fire Rate: " + DataManager.data.maxFireRate.ToString("");
+        currDmgText.text = "Current Damage: " + DataManager.data.maxDamage.ToString("D2");
+        currFireRateText.text = "Current Fire Rate: " + DataManager.data.maxFireRate.ToString("");
     }
 }
