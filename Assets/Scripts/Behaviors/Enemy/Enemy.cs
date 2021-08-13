@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int health = 100;
+    public int scoreWorth;
 
     public void TakeDamage (int damage, Weapon.weaponTypeEnum weaponType) {
         //Testing weaponType enum
@@ -31,5 +32,6 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+        GameMaster.Score += scoreWorth;
     }
 }
