@@ -11,6 +11,8 @@ public class EnemyMovement : MonoBehaviour
     private int switchMovement = 1;
 
     private float maxTimer;
+
+    Enemy.enemyTypeEnum enemyType;
     void Start()
     {
         maxTimer = timer;
@@ -19,19 +21,60 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer < 0)
+        enemyType = FindObjectOfType<Enemy>().enemyType;
+        if (enemyType == Enemy.enemyTypeEnum.RedEnemy)
         {
-            switchMovement *= -1;
-            timer = maxTimer * 2;
-        }
-        
-        if (switchMovement == 1)
-        {
-            transform.position += Vector3.right * Time.deltaTime;
-        }
-        else
-            transform.position += Vector3.left * Time.deltaTime;
+            if (timer < 0)
+            {
+                switchMovement *= -1;
+                timer = maxTimer * 2;
+            }
 
-        timer -= Time.deltaTime;
+            if (switchMovement == 1)
+            {
+                transform.position += Vector3.right * Time.deltaTime;
+            }
+            else
+                transform.position += Vector3.left * Time.deltaTime;
+
+            timer -= Time.deltaTime;
+        }
+
+
+
+        else if (enemyType == Enemy.enemyTypeEnum.BlueEnemy)
+        {
+            transform.position += Vector3.down * Time.deltaTime;
+        }
+
+
+
+        else if (enemyType == Enemy.enemyTypeEnum.YellowEnemy)
+        {
+            if (timer < 0)
+            {
+                switchMovement *= -1;
+                timer = maxTimer * 2;
+            }
+
+            if (switchMovement == 1)
+            {
+                transform.position += Vector3.down * Time.deltaTime;
+                transform.position += Vector3.left * Time.deltaTime;
+            }
+            else
+            {
+                transform.position += Vector3.down * Time.deltaTime;
+                transform.position += Vector3.right * Time.deltaTime;
+            }
+
+            timer -= Time.deltaTime;
+        }
+    }
+
+    void OnBecameInvisible()
+    {
+        enabled = false;
+        Destroy(gameObject);
     }
 }

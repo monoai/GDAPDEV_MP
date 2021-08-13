@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public enemyTypeEnum enemyType;
+    public enum enemyTypeEnum { RedEnemy, BlueEnemy, YellowEnemy };
+
     public int health = 100;
     public int scoreWorth;
 
