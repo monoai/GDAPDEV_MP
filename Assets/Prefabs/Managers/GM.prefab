@@ -82,6 +82,7 @@ MonoBehaviour:
   maxLives: 3
   startingMoney: 0
   startingScore: 0
+  gameOverUI: {fileID: 0}
 --- !u!114 &1970408437
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -51,17 +51,20 @@ public class GameMaster : MonoBehaviour
     private int startingScore;
     public static int Score;
 
+    [SerializeField]
+    [Header("UI Control")]
+    private GameObject gameOverUI;
+
     void Start() {
         _remainingLives = maxLives;
         Money = startingMoney;
         Score = startingScore;
     }
 
-    public void EndGame()
+    public void gameOver()
     {
         Debug.Log("Game Over!");
-        //Anything Game Over related here
-        //GameOver UI here
+        gameOverUI.SetActive(true);
     }
 
     public IEnumerator RespawnPlayer() {
@@ -74,7 +77,7 @@ public class GameMaster : MonoBehaviour
         Destroy (player.gameObject);
         _remainingLives -= 1;
         if(_remainingLives <= 0) {
-            gm.EndGame();
+            gm.gameOver();
         } else {
             gm.StartCoroutine(gm.RespawnPlayer());
         }
