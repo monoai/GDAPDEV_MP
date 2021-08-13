@@ -43,6 +43,9 @@ public class GestureManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        Ray ray = Camera.main.ScreenPointToRay(trackedFinger1.position);
+        Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+
         if (Input.touchCount > 0)
         {
             CheckSingleFingerGestures();
