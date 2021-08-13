@@ -27,16 +27,20 @@ public class WaveSpawner : MonoBehaviour
     //Should be, or can be private
     public SpawnState state = SpawnState.Counting;
 
+    private GameMaster gm;
+
     void Start() {
         if(spawnPoints.Length == 0 ) {
             Debug.LogError("No Spawn Points, please add one.");
         }
 
         waveCountdown = timeBetweenWaves;
+        gm = GetComponent<GameMaster>();
     }
 
     void Update() {
         if(state == SpawnState.Finished) {
+            gm.gameEnd();
             return;
         }
         if(state == SpawnState.Waiting) {

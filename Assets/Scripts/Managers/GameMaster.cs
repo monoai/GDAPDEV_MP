@@ -51,9 +51,11 @@ public class GameMaster : MonoBehaviour
     private int startingScore;
     public static int Score;
 
-    [SerializeField]
     [Header("UI Control")]
+    [SerializeField]
     private GameObject gameOverUI;
+    [SerializeField]
+    private GameObject gameWonUI;
 
     void Start() {
         _remainingLives = maxLives;
@@ -65,6 +67,11 @@ public class GameMaster : MonoBehaviour
     {
         Debug.Log("Game Over!");
         gameOverUI.SetActive(true);
+    }
+
+    public void gameEnd(){
+        Debug.Log("Game ended!");
+        gameWonUI.SetActive(true);
     }
 
     public IEnumerator RespawnPlayer() {
