@@ -1,4 +1,5 @@
 using UnityEngine.Audio;
+using UnityEngine.UI;
 using System;
 using UnityEngine;
 
@@ -6,8 +7,10 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
-
     public static AudioManager instance;
+
+    private bool BGMflag = true;
+    private bool SFXflag = true;
 
     void Awake()
     {
@@ -36,7 +39,9 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-       Play("BGM");
+        Play("BGM");
+        BGMflag = true;
+        SFXflag = true;
     }
 
     public void Play(string name)
@@ -47,6 +52,58 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound file '" + name + "' not found!!");
             return;
         }
-        s.source.Play();
+        s.source.Play();    
+    }
+
+    public void SetSliders(Slider slider)
+    {
+        if (slider.name == "BGM Slider") SetBGMVolume(slider);
+        else if (slider.name == "SFX Slider") SetSFXVolume(slider);
+        else 
+        { 
+            Debug.LogWarning("Slider '" + "BGM" + "' not found!!");
+            return; 
+        }
+    }
+
+    public void SetBGMVolume(Slider slider)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == "BGM");
+        if (s == null)
+        {
+            Debug.LogWarning("Sound file '" + "BGM" + "' not found!!");
+            return;
+        }
+
+        if (BGMflag)
+        {
+            slider.value = s.volume;
+            BGMflag = false;
+        }
+
+        s.volume = slider.value;
+        s.source.volume = s.volume;
+    }
+
+    public void SetSFXVolume(Slider slider)
+    {
+        for (int i = 1; i < sounds.Length; i++) // sounds[0] is the BGM Sound
+        {
+            Sound s = sounds[i];
+            if (s == null)
+            {
+                Debug.LogWarning("Sound file '" + s.name + "' not found!!");
+                return;
+            }
+
+            if (SFXflag)
+            {
+                slider.value = s.volume;
+                SFXflag = false;
+            }
+
+            s.volume = slider.value;
+            s.source.volume = s.volume;
+        }
     }
 }
