@@ -276,6 +276,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c5f22497e95f24a8e8002fc214e634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xMinClamp: 0.1
+  xMaxClamp: 0.9
+  yMinClamp: 0.1
+  yMaxClamp: 0.9
 --- !u!114 &1516885454333362283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +287,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516885454333362281}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70c218a59e523404da02fe4e1f29c72f, type: 3}
   m_Name: 

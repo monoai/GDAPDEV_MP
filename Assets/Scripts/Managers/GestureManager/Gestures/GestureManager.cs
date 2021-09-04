@@ -25,6 +25,7 @@ public class GestureManager : MonoBehaviour
         }
     }
 
+    // Primary trackers
     private Touch trackedFinger1;
     private Touch trackedFinger2;
     private Vector2 startPoint;
@@ -32,10 +33,15 @@ public class GestureManager : MonoBehaviour
     private float gestureTime1;
     private float gestureTime2;
 
+    // Player object for direct manipulation
+    private GameObject player;
+    private PlayerStats stats;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        stats = PlayerStats.instance;
     }
 
     // Update is called once per frame
@@ -54,11 +60,13 @@ public class GestureManager : MonoBehaviour
             trackedFinger2 = Input.GetTouch(1);
 
             //yo this is mad ugly, why
+            //Starts gesture time if finger1 either moves or is stationary while finger2 began moving
             if (trackedFinger1.phase == TouchPhase.Moved && trackedFinger2.phase == TouchPhase.Began || trackedFinger1.phase == TouchPhase.Stationary && trackedFinger2.phase == TouchPhase.Began)
             {
                 gestureTime2 = 0;
                 startPoint = trackedFinger2.position;
             }
+            //Ends evaluation if finger2 ends touching
             else if (trackedFinger1.phase == TouchPhase.Moved && trackedFinger2.phase == TouchPhase.Ended)
             {
                 endPoint = trackedFinger2.position;
@@ -70,6 +78,7 @@ public class GestureManager : MonoBehaviour
                     FireSwipeEvent();
                 }
             }
+            //if finger2 is still moving, keep adding gesture time
             else
             {
                 gestureTime2 += Time.deltaTime;
@@ -102,15 +111,16 @@ public class GestureManager : MonoBehaviour
             gestureTime1 += Time.deltaTime;
             if (gestureTime1 >= _dragProperty.dragBufferTime)
             {
-                FireDragEvent();
+                FireDragEvent(trackedFinger1);
             }
         }
     }
 
-    private void FireDragEvent()
+    private void FireDragEvent(Touch touch)
     {
         Debug.Log($"Drag: {trackedFinger1.position}");
 
+        player.transform.Translate(touch.deltaPosition.x / Screen.width * (5.0f * stats.moveSpeedPercent), touch.deltaPosition.y / Screen.height * (5.0f * stats.moveSpeedPercent * stats.verticalCompensator), 0.0f, Space.World);
     }
 
     private void FireSwipeEvent()
