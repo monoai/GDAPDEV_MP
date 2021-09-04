@@ -3346,14 +3346,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7532667927884455318, guid: cbb4a89af82de134d80a839df32427c0, type: 3}
-      propertyPath: _swipeProperty.swipeTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7532667927884455318, guid: cbb4a89af82de134d80a839df32427c0, type: 3}
-      propertyPath: _swipeProperty.minSwipeDistance
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7532667927884455319, guid: cbb4a89af82de134d80a839df32427c0, type: 3}
       propertyPath: m_Name
       value: GestureManager

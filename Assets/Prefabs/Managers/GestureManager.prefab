@@ -47,7 +47,7 @@ MonoBehaviour:
     dragBufferTime: 0.6
   _swipeProperty:
     minSwipeDistance: 1
-    swipeTime: 0.25
+    swipeTime: 0.3
   _tapProperty:
     tapTime: 0.7
     tapMaxDistance: 0.1

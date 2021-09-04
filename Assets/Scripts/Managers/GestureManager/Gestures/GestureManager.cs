@@ -75,7 +75,7 @@ public class GestureManager : MonoBehaviour
                 if (gestureTime2 <= _swipeProperty.swipeTime &&
                     Vector2.Distance(startPoint, endPoint) >= (Screen.dpi * _swipeProperty.minSwipeDistance))
                 {
-                    FireSwipeEvent();
+                    FireSwipeEvent(false);
                 }
             }
             //if finger2 is still moving, keep adding gesture time
@@ -103,7 +103,7 @@ public class GestureManager : MonoBehaviour
             if (gestureTime1 <= _swipeProperty.swipeTime &&
                 Vector2.Distance(startPoint, endPoint) >= (Screen.dpi * _swipeProperty.minSwipeDistance))
             {
-                FireSwipeEvent();
+                FireSwipeEvent(true);
             }
         }
         else
@@ -118,41 +118,46 @@ public class GestureManager : MonoBehaviour
 
     private void FireDragEvent(Touch touch)
     {
-        Debug.Log($"Drag: {trackedFinger1.position}");
+        //Debug.Log($"Drag: {trackedFinger1.position}");
 
-        player.transform.Translate(touch.deltaPosition.x / Screen.width * (5.0f * stats.moveSpeedPercent), touch.deltaPosition.y / Screen.height * (5.0f * stats.moveSpeedPercent * stats.verticalCompensator), 0.0f, Space.World);
+        player.transform.Translate(touch.deltaPosition.x / Screen.width * (5.0f * stats.moveSpeedPercent), touch.deltaPosition.y / Screen.height * (5.0f * stats.moveSpeedPercent * stats.verticalCompensator), 0.0f);
     }
 
-    private void FireSwipeEvent()
+    private void FireSwipeEvent(bool isSingle)
     {
         Debug.Log("Swiped");
         Vector2 dir = endPoint - startPoint;
 
-        SwipeDirections swipeDir = SwipeDirections.RIGHT;
         if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y)) // Horizontal Swipes
         {
-            if (dir.x > 0)
+            if (isSingle)
             {
-                Debug.Log("Right");
-                swipeDir = SwipeDirections.RIGHT;
-            }
-            else
-            {
-                Debug.Log("Left");
-                swipeDir = SwipeDirections.LEFT;
+                if (dir.x > 0)
+                {
+                    Debug.Log("Right");
+                    player.transform.position = new Vector3(player.transform.position.x + 2.5f, player.transform.position.y, 0.0f);
+                }
+                else
+                {
+                    Debug.Log("Left");
+                    player.transform.position = new Vector3(player.transform.position.x - 2.5f, player.transform.position.y, 0.0f);
+                }
             }
         }
         else // Vertical Swipes
         {
-            if (dir.y > 0)
+            if (isSingle == false)
             {
-                Debug.Log("Up");
-                swipeDir = SwipeDirections.UP;
-            }
-            else
-            {
-                Debug.Log("Down");
-                swipeDir = SwipeDirections.DOWN;
+                if (dir.y > 0)
+                {
+                    Debug.Log("Up");
+                    GameMaster.gm.changeWeapon(1);
+                }
+                else
+                {
+                    Debug.Log("Down");
+                    GameMaster.gm.changeWeapon(-1);
+                }
             }
         }
     }
