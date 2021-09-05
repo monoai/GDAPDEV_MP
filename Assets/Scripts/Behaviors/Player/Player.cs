@@ -6,6 +6,14 @@ public class Player : MonoBehaviour
 {
     private PlayerStats stats;
 
+    //Only for the sake of easier debugging values
+    //Can be removed if no longer needed
+    [Header("[DEBUG] Clamp Values")]
+    public float xMinClamp;
+    public float xMaxClamp;
+    public float yMinClamp;
+    public float yMaxClamp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +26,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Can possibly be improved so that player will guaranteed be within the bounds (it has this sort of bounciness/jitter? at times), but otherwise it's pretty much a bit perfect already eh?
+        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+        pos.x = Mathf.Clamp(pos.x, xMinClamp, xMaxClamp);
+        pos.y = Mathf.Clamp(pos.y, yMinClamp, yMaxClamp);
+        transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
 
-    public void DamagePlayer(int damage) {
+    public void DamagePlayer(int damage)
+    {
         stats.curHealth -= damage;
-        if(stats.curHealth <= 0) {
+        if (stats.curHealth <= 0)
+        {
             GameMaster.KillPlayer(this);
         }
     }

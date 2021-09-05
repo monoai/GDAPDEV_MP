@@ -7,13 +7,11 @@ using System;
 public class GestureManager : MonoBehaviour
 {
     public static GestureManager Instance;
-    public EventHandler<TapEventArgs> OnTap;
-    public EventHandler<DragEventArgs> OnDrag;
-    public EventHandler<SwipeEventArgs> OnSwipe;
 
+    // Gesture properties
     public DragProperty _dragProperty;
     public SwipeProperty _swipeProperty;
-    public TapProperty _tapProperty;
+    //public TapProperty _tapProperty;
 
     private void Awake()
     {
@@ -27,6 +25,7 @@ public class GestureManager : MonoBehaviour
         }
     }
 
+    // Primary trackers
     private Touch trackedFinger1;
     private Touch trackedFinger2;
     private Vector2 startPoint;
@@ -34,10 +33,15 @@ public class GestureManager : MonoBehaviour
     private float gestureTime1;
     private float gestureTime2;
 
+    // Player object for direct manipulation
+    private GameObject player;
+    private PlayerStats stats;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        stats = PlayerStats.instance;
     }
 
     // Update is called once per frame
@@ -50,35 +54,43 @@ public class GestureManager : MonoBehaviour
         {
             CheckSingleFingerGestures();
         }
-        if (Input.touchCount > 1) {
+        if (Input.touchCount > 1)
+        {
             trackedFinger1 = Input.GetTouch(0);
             trackedFinger2 = Input.GetTouch(1);
 
             //yo this is mad ugly, why
-            if(trackedFinger1.phase == TouchPhase.Moved && trackedFinger2.phase == TouchPhase.Began || trackedFinger1.phase == TouchPhase.Stationary && trackedFinger2.phase == TouchPhase.Began) {
+            //Starts gesture time if finger1 either moves or is stationary while finger2 began moving
+            if (trackedFinger1.phase == TouchPhase.Moved && trackedFinger2.phase == TouchPhase.Began || trackedFinger1.phase == TouchPhase.Stationary && trackedFinger2.phase == TouchPhase.Began)
+            {
                 gestureTime2 = 0;
                 startPoint = trackedFinger2.position;
             }
-            else if (trackedFinger1.phase == TouchPhase.Moved && trackedFinger2.phase == TouchPhase.Ended) {
+            //Ends evaluation if finger2 ends touching
+            else if (trackedFinger1.phase == TouchPhase.Moved && trackedFinger2.phase == TouchPhase.Ended)
+            {
                 endPoint = trackedFinger2.position;
 
                 // Swipe Events
                 if (gestureTime2 <= _swipeProperty.swipeTime &&
-                    Vector2.Distance(startPoint, endPoint) >=  (Screen.dpi * _swipeProperty.minSwipeDistance) )
+                    Vector2.Distance(startPoint, endPoint) >= (Screen.dpi * _swipeProperty.minSwipeDistance))
                 {
-                    FireSwipeEvent();
+                    FireSwipeEvent(false);
                 }
             }
-            else {
+            //if finger2 is still moving, keep adding gesture time
+            else
+            {
                 gestureTime2 += Time.deltaTime;
             }
         }
     }
 
-    private void CheckSingleFingerGestures() {
+    private void CheckSingleFingerGestures()
+    {
         trackedFinger1 = Input.GetTouch(0);
 
-        if(trackedFinger1.phase == TouchPhase.Began)
+        if (trackedFinger1.phase == TouchPhase.Began)
         {
             gestureTime1 = 0;
             startPoint = trackedFinger1.position;
@@ -87,18 +99,11 @@ public class GestureManager : MonoBehaviour
         {
             endPoint = trackedFinger1.position;
 
-            // Tap Events
-            if (gestureTime1 <= _tapProperty.tapTime &&
-                Vector2.Distance(startPoint, endPoint) < (Screen.dpi * _tapProperty.tapMaxDistance))
-            {
-                FireTapEvent(startPoint);
-            }
-
             // Swipe Events
             if (gestureTime1 <= _swipeProperty.swipeTime &&
-                Vector2.Distance(startPoint, endPoint) >=  (Screen.dpi * _swipeProperty.minSwipeDistance) )
+                Vector2.Distance(startPoint, endPoint) >= (Screen.dpi * _swipeProperty.minSwipeDistance))
             {
-                FireSwipeEvent();
+                FireSwipeEvent(true);
             }
         }
         else
@@ -106,125 +111,53 @@ public class GestureManager : MonoBehaviour
             gestureTime1 += Time.deltaTime;
             if (gestureTime1 >= _dragProperty.dragBufferTime)
             {
-                FireDragEvent();
+                FireDragEvent(trackedFinger1);
             }
         }
     }
 
-    private void FireDragEvent()
+    private void FireDragEvent(Touch touch)
     {
         //Debug.Log($"Drag: {trackedFinger1.position}");
 
-        Ray r = Camera.main.ScreenPointToRay(trackedFinger1.position);
-        RaycastHit hit = new RaycastHit();
-        GameObject hitObj = null;
-
-        if (Physics.Raycast(r, out hit, Mathf.Infinity))
-        {
-            hitObj = hit.collider.gameObject;
-        }
-
-        DragEventArgs args = new DragEventArgs(trackedFinger1, hitObj);
-        if (OnDrag != null)
-        {
-            OnDrag(this, args);
-        }
-
-        if (hitObj != null)
-        {
-            IDrag draginterface = hitObj.GetComponent<IDrag>();
-            if (draginterface != null)
-            {
-                draginterface.OnDrag(args);
-            }
-        }
+        player.transform.Translate(touch.deltaPosition.x / Screen.width * (5.0f * stats.moveSpeedPercent), touch.deltaPosition.y / Screen.height * (5.0f * stats.moveSpeedPercent * stats.verticalCompensator), 0.0f);
     }
 
-    private void FireSwipeEvent()
+    private void FireSwipeEvent(bool isSingle)
     {
         Debug.Log("Swiped");
         Vector2 dir = endPoint - startPoint;
 
-        Ray r = Camera.main.ScreenPointToRay(startPoint);
-        RaycastHit hit = new RaycastHit();
-        GameObject hitObj = null;
-
-        if (Physics.Raycast(r, out hit, Mathf.Infinity))
-        {
-            hitObj = hit.collider.gameObject;
-        }
-
-
-        SwipeDirections swipeDir = SwipeDirections.RIGHT;
         if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y)) // Horizontal Swipes
         {
-            if (dir.x > 0)
+            if (isSingle)
             {
-                Debug.Log("Right");
-                swipeDir = SwipeDirections.RIGHT;
-            }
-            else
-            {
-                Debug.Log("Left");
-                swipeDir = SwipeDirections.LEFT;
+                if (dir.x > 0)
+                {
+                    Debug.Log("Right");
+                    player.transform.position = new Vector3(player.transform.position.x + 2.5f, player.transform.position.y, 0.0f);
+                }
+                else
+                {
+                    Debug.Log("Left");
+                    player.transform.position = new Vector3(player.transform.position.x - 2.5f, player.transform.position.y, 0.0f);
+                }
             }
         }
         else // Vertical Swipes
         {
-            if (dir.y > 0)
+            if (isSingle == false)
             {
-                Debug.Log("Up");
-                swipeDir = SwipeDirections.UP;
-            }
-            else
-            {
-                Debug.Log("Down");
-                swipeDir = SwipeDirections.DOWN;
-            }
-        }
-
-        SwipeEventArgs args = new SwipeEventArgs(startPoint, swipeDir, dir, hitObj);
-        if (OnSwipe != null)
-        {
-            OnSwipe(this, args);
-        }
-
-        if (hitObj != null)
-        {
-            ISwipe swipeInterface = hitObj.GetComponent<ISwipe>();
-            if (swipeInterface != null)
-            {
-                swipeInterface.OnSwipe(args);
-            }
-        }
-    }
-
-    private void FireTapEvent(Vector2 pos)
-    {
-        Debug.Log("Tap");
-        if (OnTap != null)
-        {
-            GameObject hitObj = null;
-            Ray r = Camera.main.ScreenPointToRay(pos);
-            RaycastHit hit = new RaycastHit();
-
-            if (Physics.Raycast(r, out hit, Mathf.Infinity))
-            {
-                hitObj = hit.collider.gameObject;
-            }
-
-            TapEventArgs args = new TapEventArgs(pos, hitObj);
-            OnTap(this, args);
-
-            if (hitObj != null)
-            {
-                //TapObjectReceiver rec = hitObj.GetComponent<TapObjectReceiver>();
-                ITap rec = hitObj.GetComponent<ITap>();
-                if (rec != null)
+                if (dir.y > 0)
                 {
-                    rec.OnTap();
+                    Debug.Log("Up");
+                    GameMaster.gm.changeWeapon(1);
                 }
-
+                else
+                {
+                    Debug.Log("Down");
+                    GameMaster.gm.changeWeapon(-1);
+                }
             }
         }
     }

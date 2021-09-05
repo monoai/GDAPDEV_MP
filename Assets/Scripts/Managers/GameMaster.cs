@@ -8,11 +8,15 @@ public class GameMaster : MonoBehaviour
 
     public static GameMaster gm;
 
-    void Awake() {
+    void Awake()
+    {
         //screenSize = new Vector3(Screen.height, Screen.width, 0);
-        if(gm == null) {
+        if (gm == null)
+        {
             gm = this;
-        } else if (gm != this) {
+        }
+        else if (gm != this)
+        {
             Destroy(gameObject);
         }
 
@@ -43,7 +47,8 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     [Header("Player Resources")]
     private static int _remainingLives;
-    public static int RemainingLives {
+    public static int RemainingLives
+    {
         get { return _remainingLives; }
     }
 
@@ -62,29 +67,44 @@ public class GameMaster : MonoBehaviour
 
     private WaveSpawner waveSpawn;
 
-    void Start() {
+    private int currWeapon = 1;
+
+    private Weapon weapon;
+
+    void Start()
+    {
+        weapon = GameObject.FindGameObjectWithTag("Player").GetComponent<Weapon>();
         waveSpawn = GetComponent<WaveSpawner>();
         _remainingLives = DataManager.data.maxLives;
         Score = startingScore;
     }
 
-    void Update() {
+    void Update()
+    {
         timeInterval -= Time.deltaTime;
-        if(timeInterval <= 0f) {
+        if (timeInterval <= 0f)
+        {
             timeInterval = 1f;
-            if(validScene()) {
+            if (validScene())
+            {
                 waveSpawn.enabled = true;
-            } else {
+            }
+            else
+            {
                 waveSpawn.enabled = false;
             }
         }
     }
 
-    bool validScene() {
+    bool validScene()
+    {
         Scene scene = SceneManager.GetActiveScene();
-        if(scene.name != "Lobby Scene" && scene.name != "Main Menu") {
+        if (scene.name != "Lobby Scene" && scene.name != "Main Menu")
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -95,25 +115,64 @@ public class GameMaster : MonoBehaviour
         gameOverUI.SetActive(true);
     }
 
-    public void gameEnd(){
+    public void gameEnd()
+    {
         Debug.Log("Game ended!");
         DataManager.data.Money += 3;
         gameWonUI.SetActive(true);
     }
 
-    public IEnumerator RespawnPlayer() {
+    public IEnumerator RespawnPlayer()
+    {
         yield return new WaitForSeconds(spawnDelay);
         //Instantiate(playerPrefab, (screenSize - spawnPos), rotation);
         Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 
-    public static void KillPlayer (Player player) {
-        Destroy (player.gameObject);
+    public static void KillPlayer(Player player)
+    {
+        Destroy(player.gameObject);
         _remainingLives -= 1;
-        if(_remainingLives <= 0) {
+        if (_remainingLives <= 0)
+        {
             gm.gameOver();
-        } else {
+        }
+        else
+        {
             gm.StartCoroutine(gm.RespawnPlayer());
+        }
+    }
+
+    public void changeWeapon(int choice)
+    {
+
+        currWeapon = currWeapon + choice;
+        if (currWeapon > 3)
+        {
+            currWeapon = 1;
+        }
+        else if (currWeapon < 1)
+        {
+            currWeapon = 3;
+        }
+        Debug.Log(currWeapon);
+        switch (currWeapon)
+        {
+            case 1:
+                weapon.currWeapon = weapon.bulletPrefab;
+                weapon.weaponType = Weapon.weaponTypeEnum.Red;
+                Debug.Log("Weapon is now: " + weapon.weaponType);
+                break;
+            case 2:
+                weapon.currWeapon = null;
+                weapon.weaponType = Weapon.weaponTypeEnum.Blue;
+                Debug.Log("Weapon is now: " + weapon.weaponType);
+                break;
+            case 3:
+                weapon.currWeapon = weapon.wavePrefab;
+                weapon.weaponType = Weapon.weaponTypeEnum.Yellow;
+                Debug.Log("Weapon is now: " + weapon.weaponType);
+                break;
         }
     }
 

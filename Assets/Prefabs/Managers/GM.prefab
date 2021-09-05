@@ -94,10 +94,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baeaa9d18bbd9134191359d1f96be601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  maxFireRate: 0
+  maxHealth: 100
+  maxFireRate: 1
   fireRate: 0
-  maxDamage: 0
+  maxDamage: 10
+  moveSpeedPercent: 1
+  verticalCompensator: 1.8
 --- !u!114 &452507678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +107,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8480698357162643481}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2dc13ea6cf335b45a83eb4f27fe70ad, type: 3}
   m_Name: 
@@ -113,7 +115,15 @@ MonoBehaviour:
   waves:
   - name: TestWave
     enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
-    count: 3
+    count: 5
+    rate: 1
+  - name: TestWave
+    enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+    count: 5
+    rate: 1
+  - name: TestWave
+    enemy: {fileID: 3471360457468915696, guid: a55fa1d159604fe45b06ea3fbaf5ddeb, type: 3}
+    count: 5
     rate: 1
   spawnPoints:
   - {fileID: 0}
