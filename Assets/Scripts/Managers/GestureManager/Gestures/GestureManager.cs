@@ -11,7 +11,7 @@ public class GestureManager : MonoBehaviour
     // Gesture properties
     public DragProperty _dragProperty;
     public SwipeProperty _swipeProperty;
-    public TapProperty _tapProperty;
+    //public TapProperty _tapProperty;
 
     private void Awake()
     {

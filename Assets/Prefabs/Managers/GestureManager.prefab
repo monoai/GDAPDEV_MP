@@ -44,10 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dragProperty:
-    dragBufferTime: 0.6
+    dragBufferTime: 0.25
   _swipeProperty:
     minSwipeDistance: 1
     swipeTime: 0.3
-  _tapProperty:
-    tapTime: 0.7
-    tapMaxDistance: 0.1
