@@ -1,3 +1,4 @@
+using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using System;
@@ -9,8 +10,16 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
+    /*
     private bool BGMflag = true;
     private bool SFXflag = true;
+    private bool first = true;
+    private bool MuteOn;
+
+    private GameObject BGMslider;
+    private GameObject SFXslider;
+    private GameObject MuteToggle;
+    */
 
     void Awake()
     {
@@ -40,8 +49,24 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         Play("BGM");
+        /*
         BGMflag = true;
         SFXflag = true;
+        first = true;
+
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            BGMslider = GameObject.Find("BGM Slider");
+            SFXslider = GameObject.Find("SFX Slider");
+            MuteToggle = GameObject.Find("Mute Toggle");
+
+            SetBGMVolume(BGMslider.GetComponent<Slider>());
+            SetSFXVolume(SFXslider.GetComponent<Slider>());
+            SetBGMVolume(BGMslider.GetComponent<Slider>());
+
+            PlayerPrefs.GetInt("MuteOn", 0);
+        }
+        */
     }
 
     public void Play(string name)
@@ -54,8 +79,10 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();    
     }
+   
 
-    public void SetSliders(Slider slider)
+    /*
+    public void SetUpAudio(Slider slider) //Used for the Settings Menu
     {
         if (slider.name == "BGM Slider") SetBGMVolume(slider);
         else if (slider.name == "SFX Slider") SetSFXVolume(slider);
@@ -65,8 +92,10 @@ public class AudioManager : MonoBehaviour
             return; 
         }
     }
+    */
 
-    public void SetBGMVolume(Slider slider)
+    /*
+    public void SetBGMVolume(Slider slider) //Used for the Settings Menu
     {
         Sound s = Array.Find(sounds, sound => sound.name == "BGM");
         if (s == null)
@@ -74,6 +103,8 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound file '" + "BGM" + "' not found!!");
             return;
         }
+
+        s.volume = PlayerPrefs.GetFloat("BGM", 0.5f);
 
         if (BGMflag)
         {
@@ -83,9 +114,11 @@ public class AudioManager : MonoBehaviour
 
         s.volume = slider.value;
         s.source.volume = s.volume;
+
+        PlayerPrefs.SetFloat("BGM", slider.value);
     }
 
-    public void SetSFXVolume(Slider slider)
+    public void SetSFXVolume(Slider slider) //Used for the Settings Menu
     {
         for (int i = 1; i < sounds.Length; i++) // sounds[0] is the BGM Sound
         {
@@ -96,6 +129,8 @@ public class AudioManager : MonoBehaviour
                 return;
             }
 
+            s.volume = PlayerPrefs.GetFloat("SFX", 0.5f);
+
             if (SFXflag)
             {
                 slider.value = s.volume;
@@ -105,5 +140,60 @@ public class AudioManager : MonoBehaviour
             s.volume = slider.value;
             s.source.volume = s.volume;
         }
+        PlayerPrefs.SetFloat("SFX", slider.value);
     }
+
+    public void MuteAudio() //Used for the Settings Menu
+    {
+        Material material = MuteToggle.GetComponent<Toggle>().targetGraphic.GetComponent<Image>().material;
+        int save;
+
+        if (first)
+        {
+            if (MuteOn)
+            {
+                material.SetFloat("_Threshold", 1.0f);
+                SetMute(true);
+            }
+            else
+            {
+                material.SetFloat("_Threshold", 0.0f);
+                SetMute(false);
+            }
+
+            first = false;
+        }
+        else
+        {
+            if (MuteToggle.GetComponent<Toggle>().isOn)
+            {
+                material.SetFloat("_Threshold", 0.0f);
+                SetMute(false);
+                save = 0;
+            }
+            else
+            {
+                material.SetFloat("_Threshold", 1.0f);
+                SetMute(true);
+                save = 1;
+            }
+            PlayerPrefs.SetInt("MuteOn", save);
+        }
+    }
+
+    private void SetMute(bool isMute) //Used for the Settings Menu
+    {
+        for (int i = 0; i < sounds.Length; i++) // sounds[0] is the BGM Sound
+        {
+            Sound s = sounds[i];
+            if (s == null)
+            {
+                Debug.LogWarning("Sound file '" + s.name + "' not found!!");
+                return;
+            }
+
+            s.source.mute = isMute;
+        }
+    }
+    */
 }

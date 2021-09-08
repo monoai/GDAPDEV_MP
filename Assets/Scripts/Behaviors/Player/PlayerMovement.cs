@@ -9,30 +9,38 @@ public class PlayerMovement : MonoBehaviour
 
     public float MoveSpeed = 0.05f;
     public Joystick joystick;
+    public GameObject JoystickObject;
 
-    [HideInInspector] public enum ControlType { A, B };
-    [HideInInspector] public ControlType _controlType = ControlType.A;
+    [HideInInspector] public enum ControlTypes { A, B };
+    [HideInInspector] public ControlTypes controlType = ControlTypes.A;
 
     void Start()
     {
-
+        if (PlayerPrefs.GetInt("ControlType", 0) == 0) controlType = ControlTypes.A; // Set in SettingsManager
+        else controlType = ControlTypes.B;
     }
 
     // Update is called once per frame
     void Update()
     {
         // JOYSTICK INPUTS
-        if (_controlType == ControlType.A)
+        if (controlType == ControlTypes.A)
         {
+            JoystickObject.SetActive(true);
             Vector3 movement;
             movement.x = joystick.Horizontal;
             movement.y = joystick.Vertical;
             movement.z = 0.0f;
 
             transform.position += movement * MoveSpeed;
+            Debug.Log("Joystick is being used");
         }
-        else if (_controlType == ControlType.B) // just a temp flag to disable touch movement instead of comment blocks
+
+        // TOUCH DRAG
+        else if (controlType == ControlTypes.B) // just a temp flag to disable touch movement instead of comment blocks
         {
+            JoystickObject.SetActive(false);
+            Debug.Log("Touch Drag is being used");
             int touchCount = Input.touchCount;
             if (touchCount > 0)
             {
