@@ -176,6 +176,13 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+    public void testSpawn(Vector3 position)
+    {
+        var viewPos = Camera.main.ViewportToWorldPoint(position);
+
+        Debug.Log("Spawning at: " + viewPos);
+    }
+
     /* If we ever need to kill enemies through the GM instead
     public static void killEnemy(Enemy enemy) {
         gm.killEnemyActual(enemy);

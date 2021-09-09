@@ -8,17 +8,22 @@ public class WaveSpawner : MonoBehaviour
     public enum SpawnState { Spawning, Waiting, Counting, BossBattle, Finished };
 
     [System.Serializable]
-    public class Wave {
-        public string name;
+    public class Enemy
+    {
         public Transform enemy;
-        public int count;
+        public Vector3 position;
+    }
+
+    [System.Serializable]
+    public class Wave
+    {
+        public string name;
+        public Enemy[] enemies;
         public float rate;
     }
 
     public Wave[] waves;
     private int nextWave = 0;
-
-    public Transform[] spawnPoints;
 
     public float timeBetweenWaves = 5f;
     private float waveCountdown;
@@ -30,61 +35,77 @@ public class WaveSpawner : MonoBehaviour
 
     private GameMaster gm;
 
-    void Awake() {
+    void Awake()
+    {
     }
 
-    void Start() {
-        if(spawnPoints.Length == 0 ) {
-            Debug.LogError("No Spawn Points, please add one.");
-        }
+    void Start()
+    {
 
         waveCountdown = timeBetweenWaves;
         gm = GetComponent<GameMaster>();
     }
 
-    void Update() {
-        if(state == SpawnState.Finished) {
+    void Update()
+    {
+        if (state == SpawnState.Finished)
+        {
             state = SpawnState.Counting;
             gm.gameEnd();
             return;
         }
-        if(state == SpawnState.Waiting) {
-            if(!enemyStillAlive()) {
+        if (state == SpawnState.Waiting)
+        {
+            if (!enemyStillAlive())
+            {
                 Debug.Log("Wave Completed");
                 waveCompleted();
                 return;
-            } else {
+            }
+            else
+            {
                 return;
             }
         }
 
-        if(waveCountdown <= 0) {
-            if(state != SpawnState.Spawning) {
+        if (waveCountdown <= 0)
+        {
+            if (state != SpawnState.Spawning)
+            {
                 StartCoroutine(SpawnWave(waves[nextWave]));
             }
-        } else {
+        }
+        else
+        {
             waveCountdown -= Time.deltaTime;
         }
     }
 
-    void waveCompleted() {
+    void waveCompleted()
+    {
         state = SpawnState.Counting;
         waveCountdown = timeBetweenWaves;
 
-        if(nextWave + 1 > waves.Length - 1) {
+        if (nextWave + 1 > waves.Length - 1)
+        {
             nextWave = 0;
             Debug.Log("Completed all waves");
             state = SpawnState.Finished;
-        } else {
+        }
+        else
+        {
             nextWave++;
         }
     }
 
-    bool enemyStillAlive() {
+    bool enemyStillAlive()
+    {
         timeInterval -= Time.deltaTime;
-        if(timeInterval <= 0f) {
+        if (timeInterval <= 0f)
+        {
             timeInterval = 1f;
-            if(GameObject.FindGameObjectWithTag("Enemy") == null) {
+            if (GameObject.FindGameObjectWithTag("Enemy") == null)
+            {
                 return false;
             }
         }
@@ -92,13 +113,15 @@ public class WaveSpawner : MonoBehaviour
         return true;
     }
 
-    IEnumerator SpawnWave(Wave _wave) {
+    IEnumerator SpawnWave(Wave _wave)
+    {
         Debug.Log("Spawning Wave: " + _wave.name);
         state = SpawnState.Spawning;
 
-        for(int i = 0; i < _wave.count; i++) {
-            spawnEnemy(_wave.enemy);
-            yield return new WaitForSeconds(1f/_wave.rate);
+        for (int i = 0; i < _wave.enemies.Length; i++)
+        {
+            spawnEnemy(_wave.enemies[i].enemy, _wave.enemies[i].position);
+            yield return new WaitForSeconds(1f / _wave.rate);
         }
 
         state = SpawnState.Waiting;
@@ -106,10 +129,11 @@ public class WaveSpawner : MonoBehaviour
         yield break;
     }
 
-    void spawnEnemy(Transform _enemy) {
+    void spawnEnemy(Transform _enemy, Vector3 position)
+    {
         Debug.Log("Spawning enemy: " + _enemy.name);
-        Transform newSpawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(_enemy, newSpawn.position, newSpawn.rotation);
+        var newPos = Camera.main.ViewportToWorldPoint(position);
+        Instantiate(_enemy, newPos, Quaternion.identity);
     }
 
 }
