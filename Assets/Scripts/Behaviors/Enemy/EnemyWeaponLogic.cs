@@ -21,7 +21,7 @@ public class EnemyWeaponLogic : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.name == "Player")
+        if (hitInfo.tag == "Player")
         {
             Debug.Log("Player Got Hit!");
             Destroy(gameObject);

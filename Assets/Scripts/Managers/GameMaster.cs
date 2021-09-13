@@ -30,19 +30,6 @@ public class GameMaster : MonoBehaviour
     public int spawnDelay;
     //-----------------
     public Transform spawnPoint;
-    /*
-    This is a temporary variable
-    Better approach should probably be calculating the screen's DPI
-    then getting the position from there to make it adaptable
-    instead of uncertainly just dropping the point somewhere
-    which wouldn't adapt on multiple screen resolutions
-    */
-
-    //-----Work-in-progress Screen Position calculation;
-    //public Vector3 screenSize;
-    //public Vector3 spawnPos;
-    //public Quaternion rotation;
-    //-----------------
 
     [SerializeField]
     [Header("Player Resources")]
@@ -70,6 +57,8 @@ public class GameMaster : MonoBehaviour
     private int currWeapon = 1;
 
     private Weapon weapon;
+
+    float nextTimeToSearch = 0;
 
     void Start()
     {
@@ -126,7 +115,8 @@ public class GameMaster : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnDelay);
         //Instantiate(playerPrefab, (screenSize - spawnPos), rotation);
-        Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+        var newPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.25f, 0.0f));
+        Instantiate(playerPrefab, newPos, Quaternion.identity);
     }
 
     public static void KillPlayer(Player player)
@@ -181,6 +171,22 @@ public class GameMaster : MonoBehaviour
         var viewPos = Camera.main.ViewportToWorldPoint(position);
 
         Debug.Log("Spawning at: " + viewPos);
+    }
+
+    public GameObject findPlayer()
+    {
+        if (nextTimeToSearch <= Time.time)
+        {
+            GameObject searchResult = GameObject.FindGameObjectWithTag("Player");
+            if (searchResult != null)
+            {
+                return searchResult;
+            }
+            nextTimeToSearch = Time.time + 0.5f;
+        }
+
+        Debug.Log("Cant find player!");
+        return null;
     }
 
     /* If we ever need to kill enemies through the GM instead

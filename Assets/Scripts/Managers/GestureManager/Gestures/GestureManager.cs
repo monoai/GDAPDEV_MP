@@ -50,6 +50,11 @@ public class GestureManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(trackedFinger1.position);
         Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
 
+        if (player == null)
+        {
+            player = GameMaster.gm.findPlayer();
+        }
+
         if (Input.touchCount > 0)
         {
             CheckSingleFingerGestures();

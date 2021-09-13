@@ -50,7 +50,6 @@ public class WaveSpawner : MonoBehaviour
     {
         if (state == SpawnState.Finished)
         {
-            state = SpawnState.Counting;
             gm.gameEnd();
             return;
         }
