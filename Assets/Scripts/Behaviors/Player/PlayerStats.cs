@@ -30,6 +30,7 @@ public class PlayerStats : MonoBehaviour
     [Range(0.4f, 2.0f)]
     public float moveSpeedPercent;
     public float verticalCompensator;
+    public float joystickCompensator;
 
     void Awake()
     {

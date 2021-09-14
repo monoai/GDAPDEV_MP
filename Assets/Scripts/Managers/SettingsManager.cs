@@ -14,7 +14,7 @@ public class SettingsManager : MonoBehaviour
     private bool CTflag = true; // Control Type Flag
     private bool BGMflag = true;
     private bool SFXflag = true;
-    private bool Muteflag = true; 
+    private bool Muteflag = true;
     private int MuteOn;
 
     void Start()

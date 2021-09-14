@@ -37,6 +37,9 @@ public class GestureManager : MonoBehaviour
     private GameObject player;
     private PlayerStats stats;
 
+    public GameMaster.ControlTypes controlType;
+    public Joystick joystick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,11 +58,18 @@ public class GestureManager : MonoBehaviour
             player = GameMaster.gm.findPlayer();
         }
 
-        if (Input.touchCount > 0)
+        if (controlType == GameMaster.ControlTypes.A)
+        {
+            Vector3 movement = new Vector3(joystick.Horizontal, joystick.Vertical, 0.0f);
+
+            //player.transform.position += movement * stats.moveSpeedPercent;
+            player.transform.Translate(movement.x * (stats.moveSpeedPercent * stats.joystickCompensator), movement.y * (stats.moveSpeedPercent * stats.joystickCompensator), 0.0f);
+        }
+        if (Input.touchCount > 0 && controlType == GameMaster.ControlTypes.B)
         {
             CheckSingleFingerGestures();
         }
-        if (Input.touchCount > 1)
+        if (Input.touchCount > 1 && controlType == GameMaster.ControlTypes.B)
         {
             trackedFinger1 = Input.GetTouch(0);
             trackedFinger2 = Input.GetTouch(1);

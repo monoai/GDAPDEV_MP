@@ -52,6 +52,7 @@ public class GameMaster : MonoBehaviour
     //For counting purposes
     private float timeInterval = 1f;
 
+    //Other things to load
     private WaveSpawner waveSpawn;
 
     private int currWeapon = 1;
@@ -60,8 +61,14 @@ public class GameMaster : MonoBehaviour
 
     float nextTimeToSearch = 0;
 
+    //Control Type variables
+    [HideInInspector] public enum ControlTypes { A, B };
+    [HideInInspector] public ControlTypes controlType = ControlTypes.A;
+    public GameObject JoystickObject;
+
     void Start()
     {
+        applySettings();
         weapon = GameObject.FindGameObjectWithTag("Player").GetComponent<Weapon>();
         waveSpawn = GetComponent<WaveSpawner>();
         _remainingLives = DataManager.data.maxLives;
@@ -82,6 +89,23 @@ public class GameMaster : MonoBehaviour
             {
                 waveSpawn.enabled = false;
             }
+        }
+    }
+
+    void applySettings()
+    {
+        //[Apply ControlType setting]
+        //controlType = (ControlTypes)PlayerPrefs.GetInt("ControlType", 0);
+        controlType = (ControlTypes)1;
+        //Debug.Log("Control type is: " + controlType);
+        GestureManager.Instance.controlType = controlType;
+        if (controlType == ControlTypes.A)
+        {
+            JoystickObject.SetActive(true);
+        }
+        else
+        {
+            JoystickObject.SetActive(false);
         }
     }
 
