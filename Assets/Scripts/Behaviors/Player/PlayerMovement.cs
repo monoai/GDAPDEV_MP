@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-    Vector3 initTouchPos = new Vector3(0,0,0);
+    Vector3 initTouchPos = new Vector3(0, 0, 0);
 
     public float MoveSpeed = 0.05f;
     public Joystick joystick;
@@ -75,6 +75,10 @@ public class PlayerMovement : MonoBehaviour
                 }
                 */
             }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameMaster.gm.testSpawn(new Vector3(0.5f, 0.5f, 0.0f));
+            Debug.Log("Space Pressed, Spawning...");
         }
 
         /*

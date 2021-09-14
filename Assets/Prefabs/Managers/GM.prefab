@@ -82,6 +82,8 @@ MonoBehaviour:
   startingScore: 0
   gameOverUI: {fileID: 0}
   gameWonUI: {fileID: 0}
+  posX: 0
+  poxY: 0
 --- !u!114 &1970408437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,10 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baeaa9d18bbd9134191359d1f96be601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  maxFireRate: 0
+  maxHealth: 100
+  maxFireRate: 1
   fireRate: 0
-  maxDamage: 0
+  maxDamage: 10
+  moveSpeedPercent: 1
+  verticalCompensator: 1.8
 --- !u!114 &452507678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,22 +109,53 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8480698357162643481}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2dc13ea6cf335b45a83eb4f27fe70ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - name: TestWave
-    enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
-    count: 3
+  - name: Wave 1
+    enemies:
+    - enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
+      position: {x: 0.2, y: 0.8, z: 0}
+    - enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
+      position: {x: 0.3, y: 0.8, z: 0}
+    - enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
+      position: {x: 0.4, y: 0.8, z: 0}
+    - enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
+      position: {x: 0.5, y: 0.8, z: 0}
+    - enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
+      position: {x: 0.6, y: 0.8, z: 0}
+    - enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
+      position: {x: 0.7, y: 0.8, z: 0}
+    - enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
+      position: {x: 0.8, y: 0.8, z: 0}
+    count: 5
     rate: 1
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - name: Wave 2
+    enemies:
+    - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+      position: {x: 0.45, y: 0.7, z: 0}
+    - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+      position: {x: 0.55, y: 0.7, z: 0}
+    - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+      position: {x: 0.4, y: 0.8, z: 0}
+    - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+      position: {x: 0.5, y: 0.8, z: 0}
+    - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+      position: {x: 0.6, y: 0.8, z: 0}
+    - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+      position: {x: 0.7, y: 0.8, z: 0}
+    - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+      position: {x: 0.65, y: 0.7, z: 0}
+    - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+      position: {x: 0.5, y: 0.6, z: 0}
+    - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+      position: {x: 0.6, y: 0.6, z: 0}
+    - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
+      position: {x: 0.55, y: 0.5, z: 0}
+    count: 5
+    rate: 1
   timeBetweenWaves: 5
   state: 2
