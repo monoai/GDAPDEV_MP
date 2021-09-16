@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using System;
 
-public class AdsManager : MonoBehaviour IUnityAdsListener
+public class AdsManager : MonoBehaviour, IUnityAdsListener
 {
     public EventHandler<AdEventArg> OnAdDone;
 
@@ -14,17 +14,17 @@ public class AdsManager : MonoBehaviour IUnityAdsListener
         {
             //GameID for aNDROID
 #if UNITY_ANDROID
-            return "4251515";
+            return "4287573";
             //GameID for IOS
 #elif UNITY_IOS
-            return "4251514";
+            return "4287572";
 #endif
         }
     }
 
-    public const string SampleRewarded = "testRewarded";
-    public const string SampleInterstitial = "testInterstitial";
-    public const string SampleBanner = "testBanner";
+    public const string SampleRewarded = "sampleRewarded";
+    public const string SampleInterstitial = "sampleInterstitial";
+    public const string SampleBanner = "sampleBanner";
 
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class AdsManager : MonoBehaviour IUnityAdsListener
         //Advertisement.Initialize(GameID, false);
     }
 
-    //call this function when the button is cliked; place this on a button event
+    //call this function when the button is clicked; place this on a button event
     public void ShowInterstitialAd()
     {
         //Check if the ad is ready
@@ -47,7 +47,7 @@ public class AdsManager : MonoBehaviour IUnityAdsListener
         else
         {
             //If the user has no internet or the ad doesn't exist
-            //Debug.Log("No Ads: " + SampleInterstitial);
+            Debug.Log("No Ads");
         }
     }
 
@@ -116,17 +116,17 @@ public class AdsManager : MonoBehaviour IUnityAdsListener
     //Called when Ad is ready to play
     public void OnUnityAdsReady(string placementId)
     {
-        //Debug.Log($"Done loading {placementId}");
+        Debug.Log($"Done loading {placementId}");
     }
     //Called when an Ad had an error
     public void OnUnityAdsDidError(string message)
     {
-        //Debug.Log($"Ads error {message}");
+        Debug.Log($"Ads error {message}");
     }
     //Called when an Ad gets played
     public void OnUnityAdsDidStart(string placementId)
     {
-        //Debug.Log($"Ads start {placementId}");
+        Debug.Log($"Ads start {placementId}");
     }
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)

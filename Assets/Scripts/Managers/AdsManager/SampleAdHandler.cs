@@ -7,17 +7,19 @@ using UnityEngine.Advertisements;
 public class SampleAdHandler : MonoBehaviour
 {
     //Ads Manager reference
-    public AdvertismentManager adsManager;
+    public AdsManager adsManager;
 
+    public int currency = 0;
+    private Text currencyLabel;
     private void Start()
     {
         adsManager.OnAdDone += OnAdDone;
-
+        currencyLabel = GetComponent<Text>();
     }
 
-    public void OnAdDone(object sender, AdFinishEventArgs args)
+    public void OnAdDone(object sender, AdEventArg args)
     {
-        if (args.PlacementID == AdvertismentManager.SampleRewarded)
+        if (args.PlacementID == AdsManager.SampleRewarded)
         {
             switch (args.AdResult)
             {
@@ -25,7 +27,7 @@ public class SampleAdHandler : MonoBehaviour
                 case ShowResult.Skipped: Debug.Log("Ad Skipped"); break;
                 case ShowResult.Finished:
                     Debug.Log("Ad Finished");
-                    GameCredit.addCurrency(1000);
+                    currency += 1;
                     break;
             }
 
@@ -34,6 +36,6 @@ public class SampleAdHandler : MonoBehaviour
 
     private void Update()
     {
-
+        currencyLabel.text = $"Currency: {currency}";
     }
 }
