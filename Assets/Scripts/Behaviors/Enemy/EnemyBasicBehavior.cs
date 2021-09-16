@@ -64,7 +64,7 @@ public class EnemyBasicBehavior : MonoBehaviour
 
     void blueBehavior()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, -firePoint.up, 6);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, -firePoint.up);
         Debug.DrawRay(firePoint.position, hitInfo.point * 10, Color.red);
         if (hitInfo.collider != null && hitInfo.collider.tag == "Player")
         {

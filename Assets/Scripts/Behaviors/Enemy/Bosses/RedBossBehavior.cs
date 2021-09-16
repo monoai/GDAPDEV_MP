@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBossBehavior : MonoBehaviour
+public class RedBossBehavior : MonoBehaviour
 {
     [Header("Behavior Stats")]
     public float maxFireRate = 1.5f;
@@ -11,12 +11,13 @@ public class EnemyBossBehavior : MonoBehaviour
     public Transform firePos;
     public GameObject currWeapon;
 
-    [Header("Red Boss Settings")]
+    [Header("Boss Settings")]
     public float fireAngle = 30.0f;
     public float waveSpeed = 1.0f;
 
     [Header("Bullet Properties")]
     public float bulletSpeed;
+    public float damage;
 
     //Hidden Calculating Variables
     private float fireRate;
@@ -53,11 +54,10 @@ public class EnemyBossBehavior : MonoBehaviour
 
         if (fireRate < 0.0)
         {
-            //In case the player dies.
-            player = GameObject.FindGameObjectWithTag("Player");
             var bullet = Instantiate(currWeapon, firePos.position, firePos.rotation);
             var bulletValues = bullet.GetComponent<EnemyWeaponLogic>();
             bulletValues.speed = bulletSpeed;
+
             fireRate = maxFireRate;
         }
 
