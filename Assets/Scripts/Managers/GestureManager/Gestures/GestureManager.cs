@@ -38,7 +38,8 @@ public class GestureManager : MonoBehaviour
     private PlayerStats stats;
 
     public GameMaster.ControlTypes controlType;
-    public Joystick joystick;
+    public OnScreenJoystick joystick;
+    public JoystickHitbox joystickHitbox;
 
     // Start is called before the first frame update
     void Start()
@@ -60,13 +61,17 @@ public class GestureManager : MonoBehaviour
 
         if (controlType == GameMaster.ControlTypes.A)
         {
-            Vector3 movement = new Vector3(joystick.Horizontal, joystick.Vertical, 0.0f);
-
+            joystickHitbox.gameObject.SetActive(true);
+            float x = joystick.JoystickAxis.x;
+            float y = joystick.JoystickAxis.y;
             //player.transform.position += movement * stats.moveSpeedPercent;
-            player.transform.Translate(movement.x * (stats.moveSpeedPercent * stats.joystickCompensator), movement.y * (stats.moveSpeedPercent * stats.joystickCompensator), 0.0f);
+            player.transform.Translate( x * (stats.moveSpeedPercent * stats.joystickCompensator), 
+                                        y * (stats.moveSpeedPercent * stats.joystickCompensator), 
+                                        0.0f);
         }
         if (Input.touchCount > 0 && controlType == GameMaster.ControlTypes.B)
         {
+            joystickHitbox.gameObject.SetActive(false);
             CheckSingleFingerGestures();
         }
         if (Input.touchCount > 1 && controlType == GameMaster.ControlTypes.B)

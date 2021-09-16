@@ -95,8 +95,12 @@ public class GameMaster : MonoBehaviour
     void applySettings()
     {
         //[Apply ControlType setting]
-        //controlType = (ControlTypes)PlayerPrefs.GetInt("ControlType", 0);
-        controlType = (ControlTypes)1;
+
+        // The default value (2nd param) just assigns a value just in case there is no saved playerpref value 
+        // i.e. For the very first run after playerprefs implementation. Default value is useless after that
+        controlType = (ControlTypes)PlayerPrefs.GetInt("ControlType", 1);
+
+        //controlType = (ControlTypes)1;
         //Debug.Log("Control type is: " + controlType);
         GestureManager.Instance.controlType = controlType;
         if (controlType == ControlTypes.A)

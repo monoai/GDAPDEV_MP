@@ -16,6 +16,9 @@ public class SettingsManager : MonoBehaviour
     private bool SFXflag = true;
     private bool Muteflag = true;
     private int MuteOn;
+    private bool AdsFlag = true;
+    private int AdsOn;
+    private GameObject image;
 
     void Start()
     {
@@ -30,18 +33,23 @@ public class SettingsManager : MonoBehaviour
         GameObject BGMslider = GameObject.Find("BGM Slider");
         GameObject SFXslider = GameObject.Find("SFX Slider");
         GameObject MuteToggle = GameObject.Find("Mute Toggle");
+        GameObject AdsToggle = GameObject.Find("Ads Toggle");
+        image = GameObject.Find("Red X");
 
         CTflag = true;
         BGMflag = true;
         SFXflag = true;
         Muteflag = true;
         MuteOn = PlayerPrefs.GetInt("MuteOn", 0);
+        AdsFlag = true;
+        AdsOn = PlayerPrefs.GetInt("AdsOn", 0);
 
         SetControlType(ControlTypeA);
         SetControlType(ControlTypeB);
         SetBGMVolume(BGMslider.GetComponent<Slider>());
         SetSFXVolume(SFXslider.GetComponent<Slider>());
         MuteAudio(MuteToggle);
+        SetAds(AdsToggle);
 
         Debug.Log("Start End");
     }
@@ -72,6 +80,46 @@ public class SettingsManager : MonoBehaviour
         MuteAudio(MuteToggle);
     }
     */
+
+    public void SetAds(GameObject toggle)
+    {
+        Color color = image.GetComponent<Image>().color;
+        int save;
+
+        if (AdsFlag)
+        {
+            if (AdsOn == 1)
+            {
+                color.a = 1.0f;
+                image.GetComponent<Image>().color = color;
+                toggle.GetComponent<Toggle>().isOn = false;
+            }
+            else
+            {
+                color.a = 0.0f;
+                image.GetComponent<Image>().color = color;
+                toggle.GetComponent<Toggle>().isOn = true;
+            }
+
+            AdsFlag = false;
+        }
+        else
+        {
+            if (toggle.GetComponent<Toggle>().isOn)
+            {
+                color.a = 0.0f;
+                image.GetComponent<Image>().color = color;
+                save = 0;
+            }
+            else
+            {
+                color.a = 1.0f;
+                image.GetComponent<Image>().color = color;
+                save = 1;
+            }
+            PlayerPrefs.SetInt("AdsOn", save);
+        }
+    }
 
     public void SetControlType(GameObject toggle)
     {
@@ -185,7 +233,6 @@ public class SettingsManager : MonoBehaviour
 
         if (Muteflag)
         {
-            Debug.Log("Entered MuteFlag");
             if (MuteOn == 1)
             {
                 material.SetFloat("_Threshold", 1.0f);
@@ -203,7 +250,6 @@ public class SettingsManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Entered Normal Mute");
             if (toggle.GetComponent<Toggle>().isOn)
             {
                 material.SetFloat("_Threshold", 0.0f);
