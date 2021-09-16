@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class WaveSpawner : MonoBehaviour
 {
+    public Canvas canvas;
     public enum SpawnState { Spawning, Waiting, Counting, BossBattle, Finished };
 
     [System.Serializable]
@@ -132,7 +133,7 @@ public class WaveSpawner : MonoBehaviour
     {
         Debug.Log("Spawning enemy: " + _enemy.name);
         var newPos = Camera.main.ViewportToWorldPoint(position);
-        Instantiate(_enemy, newPos, Quaternion.identity);
+        Instantiate(_enemy, newPos, Quaternion.identity);//.SetParent(canvas.transform);
     }
 
 }

@@ -25,6 +25,7 @@ public class EnemyBasicBehavior : MonoBehaviour
         fireRate = maxFireRate;
         //We could also technically just pass a transform but I like typing things out on code instead.
         firePos = this.transform.localPosition - new Vector3(0.0f, 0.5f, 0.0f);
+        Debug.Log(firePos);
         if (laserLine != null && enemyType == Enemy.enemyTypeEnum.BlueEnemy)
         {
             laserLine.enabled = true;

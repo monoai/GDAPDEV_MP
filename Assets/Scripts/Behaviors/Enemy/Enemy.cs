@@ -9,6 +9,12 @@ public class Enemy : MonoBehaviour
 
     public int health = 100;
     public int scoreWorth;
+    public HealthBar hpBar;
+
+    void Start()
+    {
+        hpBar.SetHealthBar(health);
+    }
 
     public void TakeDamage(int damage, Weapon.weaponTypeEnum weaponType)
     {
@@ -34,6 +40,8 @@ public class Enemy : MonoBehaviour
 
 
         health -= (int)(damage * multiplier);
+
+        hpBar.SetHealth(health);
 
         if (health <= 0)
         {
