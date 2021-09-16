@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public enemyTypeEnum enemyType;
-    public enum enemyTypeEnum { RedEnemy, BlueEnemy, YellowEnemy };
+    public enum enemyTypeEnum { RedEnemy, BlueEnemy, YellowEnemy, RedBoss, BlueBoss, YellowBoss };
 
     public int health = 100;
     public int scoreWorth;
@@ -16,6 +16,13 @@ public class Enemy : MonoBehaviour
         hpBar.SetHealthBar(health);
     }
 
+    [Range(0.4f, 2.0f)]
+    public float RedWeaponMultiplier = 1.0f;
+    [Range(0.4f, 2.0f)]
+    public float BlueWeaponMultiplier = 0.8f;
+    [Range(0.4f, 2.0f)]
+    public float YellowWeaponMultiplier = 0.5f;
+
     public void TakeDamage(int damage, Weapon.weaponTypeEnum weaponType)
     {
         //Testing weaponType enum
@@ -25,15 +32,15 @@ public class Enemy : MonoBehaviour
         switch (weaponType)
         {
             case Weapon.weaponTypeEnum.Red:
-                multiplier = 1.0f;
+                multiplier = RedWeaponMultiplier;
                 //Debug.Log("Got hit with Red");
                 break;
             case Weapon.weaponTypeEnum.Blue:
-                multiplier = 0.8f;
+                multiplier = BlueWeaponMultiplier;
                 //Debug.Log("Got hit with Blue");
                 break;
             case Weapon.weaponTypeEnum.Yellow:
-                multiplier = 0.5f;
+                multiplier = YellowWeaponMultiplier;
                 //Debug.Log("Got hit with Yellow");
                 break;
         }
