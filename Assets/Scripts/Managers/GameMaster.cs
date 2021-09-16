@@ -77,6 +77,7 @@ public class GameMaster : MonoBehaviour
 
     void Update()
     {
+        /*
         timeInterval -= Time.deltaTime;
         if (timeInterval <= 0f)
         {
@@ -90,6 +91,7 @@ public class GameMaster : MonoBehaviour
                 waveSpawn.enabled = false;
             }
         }
+        */
     }
 
     void applySettings()
