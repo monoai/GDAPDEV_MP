@@ -17,6 +17,9 @@ public class EnemyBasicBehavior : MonoBehaviour
     private GameObject player;
 
     private Enemy.enemyTypeEnum enemyType;
+
+    private bool flag = true;
+
     void Start()
     {
         enemyType = FindObjectOfType<Enemy>().enemyType;
@@ -24,8 +27,7 @@ public class EnemyBasicBehavior : MonoBehaviour
         //We set any enemy stats by themselves instead of storing it into some large enemy script
         fireRate = maxFireRate;
         //We could also technically just pass a transform but I like typing things out on code instead.
-        firePos = this.transform.localPosition - new Vector3(0.0f, 0.5f, 0.0f);
-        Debug.Log(firePos);
+        firePos = this.transform.position - new Vector3(0.0f, 0.5f, 0.0f);
         if (laserLine != null && enemyType == Enemy.enemyTypeEnum.BlueEnemy)
         {
             laserLine.enabled = true;

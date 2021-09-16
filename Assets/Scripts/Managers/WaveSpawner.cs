@@ -133,7 +133,7 @@ public class WaveSpawner : MonoBehaviour
     {
         Debug.Log("Spawning enemy: " + _enemy.name);
         var newPos = Camera.main.ViewportToWorldPoint(position);
-        Instantiate(_enemy, newPos, Quaternion.identity);//.SetParent(canvas.transform);
+        Instantiate(_enemy, newPos, Quaternion.identity).SetParent(canvas.transform);
     }
 
 }
