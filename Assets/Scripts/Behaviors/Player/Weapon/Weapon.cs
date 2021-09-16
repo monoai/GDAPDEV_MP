@@ -67,7 +67,7 @@ public class Weapon : MonoBehaviour
 
     void laserShoot()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.up, 7);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.up);
         if (hitInfo)
         {
             Debug.Log("Laser Hit: " + hitInfo.transform.name);
