@@ -62,11 +62,13 @@ public class Weapon : MonoBehaviour
     void Shoot()
     {
         //Debug.Log("Shooting!" + "Bullet Type:" + this.bulletType);
+        FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerShoot");
         Instantiate(currWeapon, firePoint.position, firePoint.rotation);
     }
 
     void laserShoot()
     {
+        FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerShoot");
         RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.up);
         if (hitInfo)
         {

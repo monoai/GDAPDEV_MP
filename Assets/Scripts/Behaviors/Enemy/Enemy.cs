@@ -13,6 +13,15 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        if 
+        (enemyType == enemyTypeEnum.RedEnemy ||
+         enemyType == enemyTypeEnum.BlueEnemy ||
+         enemyType == enemyTypeEnum.YellowEnemy) FindObjectOfType<AudioManager>().Play("Game_SFX_BasicSpawn");
+        else if 
+        (enemyType == enemyTypeEnum.RedBoss ||
+         enemyType == enemyTypeEnum.BlueBoss ||
+         enemyType == enemyTypeEnum.YellowBoss) FindObjectOfType<AudioManager>().Play("Game_SFX_BossSpawn");
+
         hpBar.SetHealthBar(health);
     }
 
@@ -44,7 +53,7 @@ public class Enemy : MonoBehaviour
                 //Debug.Log("Got hit with Yellow");
                 break;
         }
-
+        FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyHit");
 
         health -= (int)(damage * multiplier);
 
@@ -58,6 +67,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyDeath");
         Destroy(gameObject);
         GameMaster.Score += scoreWorth;
     }

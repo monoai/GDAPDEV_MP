@@ -376,7 +376,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &100797467
@@ -890,16 +890,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1441286143}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: EnableAds
-        m_Mode: 2
+      - m_Target: {fileID: 1764823188}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 237018572}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
@@ -1019,6 +1019,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1764823188}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
@@ -2573,7 +2585,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558107285}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -2804,7 +2816,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &612965956
@@ -3042,7 +3054,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &624936688
@@ -4046,7 +4058,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
@@ -4655,7 +4667,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_PlayGame
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1395515945}
@@ -5226,7 +5238,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1083820897
@@ -5610,7 +5622,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1105696978
@@ -6273,18 +6285,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1441286143}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: CloseOptionsMenu
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1764823188}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: Play
@@ -6294,7 +6294,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1185685973
@@ -6551,7 +6551,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1195344200
@@ -6707,6 +6707,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1764823188}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
@@ -6950,7 +6962,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1287520984
@@ -7112,7 +7124,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1298844712
@@ -7450,6 +7462,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1764823188}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
@@ -7970,7 +7994,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1412485525
@@ -8791,7 +8815,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1518882095
@@ -9223,7 +9247,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1566349288
@@ -9608,7 +9632,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
@@ -10906,7 +10930,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu_SFX_Back
+          m_StringArgument: Menu_SFX_Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1851325458
@@ -11197,18 +11221,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1441286143}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: CloseOptionsMenu
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12402,13 +12414,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 448322517}
+    - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
       propertyPath: _camera
       value: 
       objectReference: {fileID: 121432763}
     - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
+      propertyPath: AdsToggle
+      value: 
+      objectReference: {fileID: 237018572}
+    - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
       propertyPath: BGMslider
       value: 
       objectReference: {fileID: 529564345}
+    - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
+      propertyPath: MoveSpeed
+      value: 
+      objectReference: {fileID: 1381187881}
     - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
       propertyPath: SFXslider
       value: 
@@ -12553,47 +12577,135 @@ PrefabInstance:
       objectReference: {fileID: 121432763}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.size
-      value: 4
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[1].clip
       value: 
-      objectReference: {fileID: 8300000, guid: f706f2f985a9c1a4c8061df027147c56, type: 3}
+      objectReference: {fileID: 8300000, guid: 60967707703671442b7b46a3083ac40e, type: 3}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[1].loop
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[1].name
-      value: Menu_SFX_Back
+      value: Menu_SFX_Select
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[2].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 60967707703671442b7b46a3083ac40e, type: 3}
+      objectReference: {fileID: 8300000, guid: de6ac0db4291e804eaa090f1a8aa3fec, type: 3}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[2].loop
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[2].name
-      value: Menu_SFX_Select
+      value: Menu_SFX_PlayGame
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[3].clip
       value: 
-      objectReference: {fileID: 8300000, guid: e473cd6a87c53d14ea06ac243468a06e, type: 3}
+      objectReference: {fileID: 8300000, guid: 8c9812daffd66f942932ae64d6fa5801, type: 3}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[3].loop
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[3].name
-      value: Menu_SFX_Selected
+      value: Game_SFX_GameOver
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: fce239856d65efa4b9260232721ea905, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[4].name
+      value: Game_SFX_GameWin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ae7b057b8d03854db0d8a039a231159, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[5].name
+      value: Game_SFX_EnemyShoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3bdf4f79259993d469ea988feb3c17d9, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: Game_SFX_PlayerShoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4e4b2164da12c614f9614d2f5189c762, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[7].name
+      value: Game_SFX_EnemyHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 92d2e6855ecad4e48a29e15cb9652426, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[8].name
+      value: Game_SFX_PlayerHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 14da8b75e744aae42ac98241c39fd351, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[9].name
+      value: Game_SFX_PlayerDeath
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[0].pitch
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 14da8b75e744aae42ac98241c39fd351, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[10].name
+      value: Game_SFX_PlayerDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[11].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a554e114621a4804eba7f5d449db5fd1, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[11].name
+      value: Game_SFX_EnemyDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3a836437667b6554ab29d2f260ef0031, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[12].name
+      value: Game_SFX_PlayerSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c21e9de61ff9a8a4abd82946f57eb64b, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[13].name
+      value: Game_SFX_BasicSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[14].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ed5b97d9dfe89c42b4c7594ed924637, type: 3}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[14].name
+      value: Game_SFX_BossSpawn
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[1].pitch
@@ -12608,8 +12720,52 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[4].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[5].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[6].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[7].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[8].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[9].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[0].volume
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[10].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[11].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[12].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[13].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[14].pitch
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[1].volume
@@ -12621,6 +12777,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
       propertyPath: sounds.Array.data[3].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[4].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[5].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[6].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[7].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[8].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[9].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[10].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[11].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[12].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[13].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453747665449902572, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}
+      propertyPath: sounds.Array.data[14].volume
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6453747665449902573, guid: 0b2b400ec6dbded4180b2fef553443dd, type: 3}

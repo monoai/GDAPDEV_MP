@@ -49,19 +49,13 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
-        /*
-        if (state == SpawnState.Finished)
-        {
-            gm.gameEnd();
-            return;
-        }
-        */
         if (state == SpawnState.Waiting)
         {
             if (!enemyStillAlive())
             {
                 Debug.Log("Wave Completed");
                 waveCompleted();
+                GameObject.Find("NotifsManager").GetComponent<NotificationsManager>().SendSimpleNotif();
                 return;
             }
             else

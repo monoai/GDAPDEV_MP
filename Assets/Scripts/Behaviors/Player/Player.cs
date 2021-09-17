@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerSpawn");
         stats = PlayerStats.instance;
 
         stats.curHealth = stats.maxHealth;
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
 
     public void DamagePlayer(int damage)
     {
+        FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerHit");
         stats.curHealth -= damage;
         hpBar.GetComponent<HealthBar>().SetHealth(stats.curHealth);
         if (stats.curHealth <= 0)
