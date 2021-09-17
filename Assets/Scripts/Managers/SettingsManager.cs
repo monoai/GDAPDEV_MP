@@ -21,7 +21,10 @@ public class SettingsManager : MonoBehaviour
     private int MuteOn;
     private bool AdsFlag = true;
     private int AdsOn;
-    private GameObject image;
+
+    private bool AdsIsEnabled;
+
+    GameObject image;
 
     void Start()
     {
@@ -88,6 +91,19 @@ public class SettingsManager : MonoBehaviour
     }
     */
 
+    void Update()
+    {
+        GameObject canvas = GameObject.Find("Canvas");
+
+        if (canvas.transform.Find("Debug Menu").gameObject.activeInHierarchy)
+        {
+            GameObject AdsButton = GameObject.Find("Ads Button");
+            if (AdsButton == null) return;
+
+            AdsButton.GetComponent<Button>().interactable = AdsIsEnabled;
+        }
+    }
+
     public void SetAds(GameObject toggle)
     {
         Color color = image.GetComponent<Image>().color;
@@ -100,12 +116,14 @@ public class SettingsManager : MonoBehaviour
                 color.a = 1.0f;
                 image.GetComponent<Image>().color = color;
                 toggle.GetComponent<Toggle>().isOn = false;
+                AdsIsEnabled = false;
             }
             else
             {
                 color.a = 0.0f;
                 image.GetComponent<Image>().color = color;
                 toggle.GetComponent<Toggle>().isOn = true;
+                AdsIsEnabled = true;
             }
 
             AdsFlag = false;
@@ -116,12 +134,14 @@ public class SettingsManager : MonoBehaviour
             {
                 color.a = 0.0f;
                 image.GetComponent<Image>().color = color;
+                AdsIsEnabled = true;
                 save = 0;
             }
             else
             {
                 color.a = 1.0f;
                 image.GetComponent<Image>().color = color;
+                AdsIsEnabled = false;
                 save = 1;
             }
             PlayerPrefs.SetInt("AdsOn", save);
