@@ -140,7 +140,7 @@ public class GestureManager : MonoBehaviour
     {
         //Debug.Log($"Drag: {trackedFinger1.position}");
 
-        player.transform.Translate(touch.deltaPosition.x / Screen.width * (5.0f * stats.moveSpeedPercent), touch.deltaPosition.y / Screen.height * (5.0f * stats.moveSpeedPercent * stats.verticalCompensator), 0.0f);
+        player.transform.Translate(touch.deltaPosition.x / Screen.width * (stats.moveSpeedCompensator * stats.moveSpeedPercent), touch.deltaPosition.y / Screen.height * (stats.moveSpeedCompensator * stats.moveSpeedPercent * stats.verticalCompensator), 0.0f);
     }
 
     private void FireSwipeEvent(bool isSingle)
