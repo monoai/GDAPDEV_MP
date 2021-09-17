@@ -11,9 +11,12 @@ public class SettingsManager : MonoBehaviour
     [HideInInspector] public int movementControlType = 0;
     private int savedControlType;
 
-    private bool CTflag = true; // Control Type Flag
+    private float moveSpeed;
+
+    private bool CTflag = true; // Control Type flag
     private bool BGMflag = true;
     private bool SFXflag = true;
+    private bool MSflag = true; // MovementSpeed flag
     private bool Muteflag = true;
     private int MuteOn;
     private bool AdsFlag = true;
@@ -32,13 +35,16 @@ public class SettingsManager : MonoBehaviour
         GameObject ControlTypeB = GameObject.Find("ControlType B");
         GameObject BGMslider = GameObject.Find("BGM Slider");
         GameObject SFXslider = GameObject.Find("SFX Slider");
+        GameObject MoveSpeed = GameObject.Find("MoveSpeed Slider");
         GameObject MuteToggle = GameObject.Find("Mute Toggle");
         GameObject AdsToggle = GameObject.Find("Ads Toggle");
         image = GameObject.Find("Red X");
 
+
         CTflag = true;
         BGMflag = true;
         SFXflag = true;
+        MSflag = true;
         Muteflag = true;
         MuteOn = PlayerPrefs.GetInt("MuteOn", 0);
         AdsFlag = true;
@@ -48,6 +54,7 @@ public class SettingsManager : MonoBehaviour
         SetControlType(ControlTypeB);
         SetBGMVolume(BGMslider.GetComponent<Slider>());
         SetSFXVolume(SFXslider.GetComponent<Slider>());
+        SetMovementSpeed(MoveSpeed.GetComponent<Slider>());
         MuteAudio(MuteToggle);
         SetAds(AdsToggle);
 
@@ -224,6 +231,28 @@ public class SettingsManager : MonoBehaviour
             s.source.volume = s.volume;
         }
         PlayerPrefs.SetFloat("SFX", slider.value);
+    }
+
+    public void SetMovementSpeed(Slider slider)
+    {
+        float MovementSpeed = PlayerPrefs.GetFloat("MovementSpeed", 1.0f);
+        Debug.Log(MovementSpeed);
+
+        if (MSflag)
+        {
+            slider.value = MovementSpeed;
+            MSflag = false;
+        }
+
+        MovementSpeed = slider.value;
+        moveSpeed = MovementSpeed;
+
+        PlayerPrefs.SetFloat("MovementSpeed", MovementSpeed);
+    }
+
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
     }
 
     public void MuteAudio(GameObject toggle)

@@ -4202,6 +4202,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1970408437, guid: 58dd5d2f57caed945bcba95c79e3c272, type: 3}
+      propertyPath: moveSpeedPercent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970408437, guid: 58dd5d2f57caed945bcba95c79e3c272, type: 3}
       propertyPath: joystickCompensator
       value: 0.1
       objectReference: {fileID: 0}

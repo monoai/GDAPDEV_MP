@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager data;
+
+    GameObject settingsManager;
 
     [SerializeField]
     [Header("Player Resources")]
@@ -15,6 +18,8 @@ public class DataManager : MonoBehaviour
     [Header("Player Stats")]
     public float maxFireRate = 0.5f;
     public int maxDamage = 10;
+
+    public float MoveSpeed = 1;
 
     void Awake() {
         if(data == null) {
@@ -29,12 +34,13 @@ public class DataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        settingsManager = GameObject.Find("SettingsManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            MoveSpeed = settingsManager.GetComponent<SettingsManager>().GetMoveSpeed();
     }
 }

@@ -18,8 +18,6 @@ public class EnemyBasicBehavior : MonoBehaviour
 
     private Enemy.enemyTypeEnum enemyType;
 
-    private bool flag = true;
-
     void Start()
     {
         enemyType = FindObjectOfType<Enemy>().enemyType;

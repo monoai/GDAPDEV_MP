@@ -41,6 +41,12 @@ public class PlayerStats : MonoBehaviour
         maxHealth = DataManager.data.maxHealth;
         maxFireRate = DataManager.data.maxFireRate;
         maxDamage = DataManager.data.maxDamage;
+        moveSpeedPercent = DataManager.data.MoveSpeed;
+    }
+
+    void Update()
+    {
+
     }
 
 }
