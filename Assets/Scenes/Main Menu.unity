@@ -12414,13 +12414,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 448322517}
+    - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
       propertyPath: _camera
       value: 
       objectReference: {fileID: 121432763}
     - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
+      propertyPath: AdsToggle
+      value: 
+      objectReference: {fileID: 237018572}
+    - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
       propertyPath: BGMslider
       value: 
       objectReference: {fileID: 529564345}
+    - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
+      propertyPath: MoveSpeed
+      value: 
+      objectReference: {fileID: 1381187881}
     - target: {fileID: 2004713840908083896, guid: 62cba2710c786b747932917457e5f221, type: 3}
       propertyPath: SFXslider
       value: 

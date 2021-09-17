@@ -25,7 +25,15 @@ public class SettingsManager : MonoBehaviour
 
     [HideInInspector] public bool AdsIsEnabled;
 
-    GameObject image;
+    public GameObject ControlTypeA;
+    public GameObject ControlTypeB;
+    public GameObject BGMslider;
+    public GameObject SFXslider;
+    public GameObject MoveSpeed;
+    public GameObject MuteToggle;
+    public GameObject AdsToggle;
+
+    public GameObject image;
 
     //It's okay to store references to objects that we prefer to hide on the editor.
     [Header("UI to Handle")]
@@ -34,21 +42,8 @@ public class SettingsManager : MonoBehaviour
 
     void Start()
     {
-        //GameObject OptionsMenu = GameObject.Find("Options Menu Canvas");
-        //CloseOptionsMenu(OptionsMenu);
-
         savedControlType = PlayerPrefs.GetInt("ControlType", 0);
         Debug.Log(savedControlType);
-
-        GameObject ControlTypeA = GameObject.Find("ControlType A");
-        GameObject ControlTypeB = GameObject.Find("ControlType B");
-        GameObject BGMslider = GameObject.Find("BGM Slider");
-        GameObject SFXslider = GameObject.Find("SFX Slider");
-        GameObject MoveSpeed = GameObject.Find("MoveSpeed Slider");
-        GameObject MuteToggle = GameObject.Find("Mute Toggle");
-        GameObject AdsToggle = GameObject.Find("Ads Toggle");
-        image = GameObject.Find("Red X");
-
 
         CTflag = true;
         BGMflag = true;
@@ -69,35 +64,6 @@ public class SettingsManager : MonoBehaviour
 
         Debug.Log("Start End");
     }
-
-    /*
-    public void OpenOptionsMenu(GameObject OptionsMenu)
-    {
-        OptionsMenu.GetComponent<Canvas>().enabled = true;
-    }
-
-    public void CloseOptionsMenu(GameObject OptionsMenu)
-    {
-        OptionsMenu.GetComponent<Canvas>().enabled = false;
-    }
-    */
-
-    /*
-    public void InitializeSavedSettings() // Set saved control type
-    {
-        GameObject ControlTypeA = GameObject.Find("ControlType A");
-        GameObject ControlTypeB = GameObject.Find("ControlType B");
-        GameObject BGMslider = GameObject.Find("BGM Slider");
-        GameObject SFXslider = GameObject.Find("SFX Slider");
-        GameObject MuteToggle = GameObject.Find("Mute Toggle");
-
-        SetControlType(ControlTypeA);
-        SetControlType(ControlTypeB);
-        SetBGMVolume(BGMslider.GetComponent<Slider>());
-        SetSFXVolume(SFXslider.GetComponent<Slider>());
-        MuteAudio(MuteToggle);
-    }
-    */
 
     void Update()
     {

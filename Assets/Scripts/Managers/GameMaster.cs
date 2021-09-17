@@ -129,7 +129,7 @@ public class GameMaster : MonoBehaviour
 
     public void gameOver()
     {
-        FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyShoot");
+        FindObjectOfType<AudioManager>().Play("Game_SFX_GameOver");
         Debug.Log("Game Over!");
 
         if (DataManager.data.isAdsEnabled)
