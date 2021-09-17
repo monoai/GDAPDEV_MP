@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private PlayerStats stats;
-    public HealthBar hpBar;
+    private GameObject hpBar;
 
     //Only for the sake of easier debugging values
     //Can be removed if no longer needed
@@ -23,7 +23,8 @@ public class Player : MonoBehaviour
         stats.curHealth = stats.maxHealth;
         stats.fireRate = stats.maxFireRate;
 
-        hpBar.SetHealthBar(stats.maxHealth);
+        hpBar = GameObject.Find("PlayerHP Bar");
+        hpBar.GetComponent<HealthBar>().SetHealthBar(stats.maxHealth);
     }
 
     // Update is called once per frame
@@ -39,7 +40,7 @@ public class Player : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         stats.curHealth -= damage;
-        hpBar.SetHealth(stats.curHealth);
+        hpBar.GetComponent<HealthBar>().SetHealth(stats.curHealth);
         if (stats.curHealth <= 0)
         {
             GameMaster.KillPlayer(this);

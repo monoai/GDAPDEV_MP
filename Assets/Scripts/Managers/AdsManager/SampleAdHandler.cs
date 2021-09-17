@@ -9,12 +9,12 @@ public class SampleAdHandler : MonoBehaviour
     //Ads Manager reference
     public AdsManager adsManager;
 
-    public int currency = 0;
-    private Text currencyLabel;
+    public int currency = 0; //TESTER
+    private Text currencyLabel; //TESTER
     private void Start()
     {
         adsManager.OnAdDone += OnAdDone;
-        currencyLabel = GetComponent<Text>();
+        currencyLabel = GetComponent<Text>(); //TESTER
     }
 
     public void OnAdDone(object sender, AdEventArg args)
@@ -27,7 +27,8 @@ public class SampleAdHandler : MonoBehaviour
                 case ShowResult.Skipped: Debug.Log("Ad Skipped"); break;
                 case ShowResult.Finished:
                     Debug.Log("Ad Finished");
-                    currency += 1;
+                    DataManager.data.Money += 3;
+                    currency += 1; //TESTER
                     break;
             }
 
@@ -36,6 +37,6 @@ public class SampleAdHandler : MonoBehaviour
 
     private void Update()
     {
-        currencyLabel.text = $"Currency: {currency}";
+        currencyLabel.text = $"Currency: {DataManager.data.Money}"; //TESTER
     }
 }

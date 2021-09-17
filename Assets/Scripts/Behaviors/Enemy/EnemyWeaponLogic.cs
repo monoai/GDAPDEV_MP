@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyWeaponLogic : MonoBehaviour
 {
     public float speed = 10f;
+    public int damage = 10;
     public Rigidbody2D body;
 
     // Start is called before the first frame update
@@ -31,6 +32,7 @@ public class EnemyWeaponLogic : MonoBehaviour
         if (player != null)
         {
             //function to hurt/kill player
+            player.DamagePlayer(damage);
         }
     }
 

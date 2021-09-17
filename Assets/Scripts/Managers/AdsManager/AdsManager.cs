@@ -116,17 +116,17 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     //Called when Ad is ready to play
     public void OnUnityAdsReady(string placementId)
     {
-        Debug.Log($"Done loading {placementId}");
+        //Debug.Log($"Done loading {placementId}");
     }
     //Called when an Ad had an error
     public void OnUnityAdsDidError(string message)
     {
-        Debug.Log($"Ads error {message}");
+        //Debug.Log($"Ads error {message}");
     }
     //Called when an Ad gets played
     public void OnUnityAdsDidStart(string placementId)
     {
-        Debug.Log($"Ads start {placementId}");
+        //Debug.Log($"Ads start {placementId}");
     }
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
