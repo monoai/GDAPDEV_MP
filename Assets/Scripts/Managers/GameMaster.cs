@@ -129,6 +129,7 @@ public class GameMaster : MonoBehaviour
 
     public void gameOver()
     {
+        FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyShoot");
         Debug.Log("Game Over!");
 
         if (DataManager.data.isAdsEnabled)
@@ -139,6 +140,7 @@ public class GameMaster : MonoBehaviour
 
     public void gameEnd()
     {
+        FindObjectOfType<AudioManager>().Play("Game_SFX_GameWin");
         Debug.Log("Game ended!");
         DataManager.data.Money += 3;
 
@@ -158,6 +160,7 @@ public class GameMaster : MonoBehaviour
 
     public static void KillPlayer(Player player)
     {
+        FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerDeath");
         Destroy(player.gameObject);
         _remainingLives -= 1;
         if (_remainingLives <= 0)

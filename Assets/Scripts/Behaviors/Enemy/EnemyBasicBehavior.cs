@@ -50,6 +50,7 @@ public class EnemyBasicBehavior : MonoBehaviour
                     yellowBehavior();
                     break;
             }
+            FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyShoot");
             fireRate = maxFireRate;
         }
 
