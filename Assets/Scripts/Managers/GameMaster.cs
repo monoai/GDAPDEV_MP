@@ -70,6 +70,7 @@ public class GameMaster : MonoBehaviour
         weapon = GameObject.FindGameObjectWithTag("Player").GetComponent<Weapon>();
         waveSpawn = GetComponent<WaveSpawner>();
         _remainingLives = DataManager.data.maxLives;
+        startingScore = DataManager.data.Score;
         Score = startingScore;
     }
 
@@ -96,7 +97,7 @@ public class GameMaster : MonoBehaviour
     {
         //[Apply ControlType setting]
 
-        // The default value (2nd param) just assigns a value just in case there is no saved playerpref value 
+        // The default value (2nd param) just assigns a value just in case there is no saved playerpref value
         // i.e. For the very first run after playerprefs implementation. Default value is useless after that
         controlType = (ControlTypes)PlayerPrefs.GetInt("ControlType", 1);
 
@@ -140,6 +141,7 @@ public class GameMaster : MonoBehaviour
     {
         Debug.Log("Game ended!");
         DataManager.data.Money += 3;
+        DataManager.data.Score += Score;
 
         if (DataManager.data.isAdsEnabled)
             GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowInterstitialAd();

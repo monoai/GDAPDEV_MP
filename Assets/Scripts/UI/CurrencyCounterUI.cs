@@ -6,11 +6,13 @@ public class CurrencyCounterUI : MonoBehaviour
 {
     private Text currencyText;
 
-    void Awake() {
+    void Awake()
+    {
         currencyText = GetComponent<Text>();
     }
 
-    void Update() {
-        currencyText.text = "Currency: " + DataManager.data.Money.ToString("D2");
+    void Update()
+    {
+        currencyText.text = "Tokens: " + DataManager.data.Money.ToString("D2");
     }
 }
