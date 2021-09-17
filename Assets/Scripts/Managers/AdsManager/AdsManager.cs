@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.SceneManagement;
 using System;
 
 public class AdsManager : MonoBehaviour, IUnityAdsListener
 {
     public EventHandler<AdEventArg> OnAdDone;
+
+    public static AdsManager instance;
 
     public string GameID
     {
@@ -26,13 +29,43 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     public const string SampleInterstitial = "sampleInterstitial";
     public const string SampleBanner = "sampleBanner";
 
+    private bool flag = true;
+
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         //when testing the game, set the param to true
         //This is to avoid being flagged / banned while testing
         Advertisement.Initialize(GameID, true);
         //when testing the game, set the param to true
         //Advertisement.Initialize(GameID, false);
+    }
+
+    void Update()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            if (DataManager.data.isAdsEnabled)
+            {
+                if (flag)
+                {
+                    flag = false;
+                    ShowBanner();
+                }
+            }
+            else HideBanner();
+        }
     }
 
     //call this function when the button is clicked; place this on a button event
@@ -86,7 +119,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
             yield return new WaitForSeconds(0.5f);
         }
 
-        Advertisement.Banner.SetPosition(BannerPosition.TOP_CENTER);
+        Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_LEFT);
         //Show the banner ad
         Advertisement.Banner.Show(SampleBanner);
     }
@@ -111,6 +144,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     {
         //Add this behavior as a listener to Ad events
         Advertisement.AddListener(this);
+        flag = true;
     }
 
     //Called when Ad is ready to play

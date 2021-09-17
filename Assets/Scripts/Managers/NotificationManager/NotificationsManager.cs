@@ -8,6 +8,8 @@ using Unity.Notifications.Android;
 //Create a empty gameobject for this script
 public class NotificationsManager : MonoBehaviour
 {
+    public static NotificationsManager instance;
+
     //public Text DataText;
     public void SendSimpleNotif()
     {
@@ -114,6 +116,18 @@ public class NotificationsManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         SetupDefaultChannel();
         SetupRepeatingChannel();
 
