@@ -15,6 +15,7 @@ public class DataManager : MonoBehaviour
     public int maxHealth = 100;
     public int Money;
     public int Score;
+    public int levelsUnlocked = 1;
 
     [Header("Player Stats")]
     public float maxFireRate = 0.5f;
