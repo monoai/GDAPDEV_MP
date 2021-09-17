@@ -3354,7 +3354,7 @@ GameObject:
   - component: {fileID: 1756140937}
   - component: {fileID: 1756140936}
   m_Layer: 5
-  m_Name: HealthBar
+  m_Name: PlayerHP Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4257,6 +4257,10 @@ PrefabInstance:
       propertyPath: gameOverUI
       value: 
       objectReference: {fileID: 1350939759}
+    - target: {fileID: 8480698357162643480, guid: 58dd5d2f57caed945bcba95c79e3c272, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 1516885454333362282, guid: 95ae1c387fd37f745ad561c710e56b46, type: 3}
     - target: {fileID: 8480698357162643480, guid: 58dd5d2f57caed945bcba95c79e3c272, type: 3}
       propertyPath: JoystickObject
       value: 
