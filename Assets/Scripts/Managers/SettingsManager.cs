@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
+    [Header("Managers to Handle")]
     public AudioManager audioManager;
 
     [HideInInspector] public int movementControlType = 0;
@@ -26,10 +27,15 @@ public class SettingsManager : MonoBehaviour
 
     GameObject image;
 
+    //It's okay to store references to objects that we prefer to hide on the editor.
+    [Header("UI to Handle")]
+    public GameObject OptionsMenu;
+
+
     void Start()
     {
-        GameObject OptionsMenu = GameObject.Find("Options Menu Canvas");
-        CloseOptionsMenu(OptionsMenu);
+        //GameObject OptionsMenu = GameObject.Find("Options Menu Canvas");
+        //CloseOptionsMenu(OptionsMenu);
 
         savedControlType = PlayerPrefs.GetInt("ControlType", 0);
         Debug.Log(savedControlType);
@@ -64,6 +70,7 @@ public class SettingsManager : MonoBehaviour
         Debug.Log("Start End");
     }
 
+    /*
     public void OpenOptionsMenu(GameObject OptionsMenu)
     {
         OptionsMenu.GetComponent<Canvas>().enabled = true;
@@ -73,6 +80,7 @@ public class SettingsManager : MonoBehaviour
     {
         OptionsMenu.GetComponent<Canvas>().enabled = false;
     }
+    */
 
     /*
     public void InitializeSavedSettings() // Set saved control type

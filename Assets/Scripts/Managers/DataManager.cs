@@ -14,6 +14,7 @@ public class DataManager : MonoBehaviour
     public int maxLives = 3;
     public int maxHealth = 100;
     public int Money;
+    public int Score;
 
     [Header("Player Stats")]
     public float maxFireRate = 0.5f;
@@ -21,10 +22,14 @@ public class DataManager : MonoBehaviour
 
     public float MoveSpeed = 1;
 
-    void Awake() {
-        if(data == null) {
+    void Awake()
+    {
+        if (data == null)
+        {
             data = this;
-        } else if (data != this) {
+        }
+        else if (data != this)
+        {
             Destroy(gameObject);
         }
 
