@@ -66,6 +66,7 @@ public class GameMaster : MonoBehaviour
 
     void Start()
     {
+        GameObject.Find("NotifsManager").GetComponent<NotificationsManager>().SendSimpleNotif();
         applySettings();
         weapon = GameObject.FindGameObjectWithTag("Player").GetComponent<Weapon>();
         waveSpawn = GetComponent<WaveSpawner>();
