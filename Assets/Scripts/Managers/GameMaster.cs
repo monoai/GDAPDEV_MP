@@ -28,8 +28,6 @@ public class GameMaster : MonoBehaviour
 
     [Header("Spawn Information")]
     public int spawnDelay;
-    //-----------------
-    public Transform spawnPoint;
 
     [SerializeField]
     [Header("Player Resources")]

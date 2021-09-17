@@ -29,6 +29,7 @@ public class PlayerStats : MonoBehaviour
     //Implement with range steps of 25.0f?
     [Range(0.4f, 2.0f)]
     public float moveSpeedPercent;
+    public float moveSpeedCompensator;
     public float verticalCompensator;
     public float joystickCompensator;
 

@@ -82,8 +82,8 @@ MonoBehaviour:
   startingScore: 0
   gameOverUI: {fileID: 0}
   gameWonUI: {fileID: 0}
-  posX: 0
-  poxY: 0
+  controlType: 0
+  JoystickObject: {fileID: 0}
 --- !u!114 &1970408437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +101,9 @@ MonoBehaviour:
   fireRate: 0
   maxDamage: 10
   moveSpeedPercent: 1
+  moveSpeedCompensator: 4
   verticalCompensator: 1.8
+  joystickCompensator: 0.1
 --- !u!114 &452507678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +111,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8480698357162643481}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2dc13ea6cf335b45a83eb4f27fe70ad, type: 3}
   m_Name: 
@@ -131,7 +133,6 @@ MonoBehaviour:
       position: {x: 0.7, y: 0.8, z: 0}
     - enemy: {fileID: 2908091128581293171, guid: 94522ada553d2034cac79b7f723ea30e, type: 3}
       position: {x: 0.8, y: 0.8, z: 0}
-    count: 5
     rate: 1
   - name: Wave 2
     enemies:
@@ -155,7 +156,17 @@ MonoBehaviour:
       position: {x: 0.6, y: 0.6, z: 0}
     - enemy: {fileID: 9190521128117114482, guid: 1adba77530abc5a4a97bffa88034eb07, type: 3}
       position: {x: 0.55, y: 0.5, z: 0}
-    count: 5
+    rate: 1
+  - name: Wave 3
+    enemies:
+    - enemy: {fileID: 3471360457468915696, guid: a55fa1d159604fe45b06ea3fbaf5ddeb, type: 3}
+      position: {x: 0.45, y: 0.7, z: 0}
+    - enemy: {fileID: 3471360457468915696, guid: a55fa1d159604fe45b06ea3fbaf5ddeb, type: 3}
+      position: {x: 0.55, y: 0.7, z: 0}
+    - enemy: {fileID: 3471360457468915696, guid: a55fa1d159604fe45b06ea3fbaf5ddeb, type: 3}
+      position: {x: 0.4, y: 0.8, z: 0}
+    - enemy: {fileID: 3471360457468915696, guid: a55fa1d159604fe45b06ea3fbaf5ddeb, type: 3}
+      position: {x: 0.5, y: 0.8, z: 0}
     rate: 1
   timeBetweenWaves: 5
   state: 2
