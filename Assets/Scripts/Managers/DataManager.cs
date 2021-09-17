@@ -20,6 +20,7 @@ public class DataManager : MonoBehaviour
     public int maxDamage = 10;
 
     public float MoveSpeed = 1;
+    public bool isAdsEnabled;
 
     void Awake() {
         if(data == null) {
@@ -41,6 +42,9 @@ public class DataManager : MonoBehaviour
     void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
             MoveSpeed = settingsManager.GetComponent<SettingsManager>().GetMoveSpeed();
+            isAdsEnabled = settingsManager.GetComponent<SettingsManager>().AdsIsEnabled;
+        }
     }
 }

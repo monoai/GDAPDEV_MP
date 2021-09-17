@@ -302,6 +302,18 @@ MonoBehaviour:
           m_StringArgument: Menu_SFX_Back
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1395515945}
+        m_TargetAssemblyTypeName: AdsManager, Assembly-CSharp
+        m_MethodName: HideBanner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &53827204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4656,6 +4668,18 @@ MonoBehaviour:
           m_StringArgument: Menu_SFX_Back
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1395515945}
+        m_TargetAssemblyTypeName: AdsManager, Assembly-CSharp
+        m_MethodName: HideBanner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &951931490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8641,7 +8665,7 @@ PrefabInstance:
     - target: {fileID: 8767543122649281085, guid: b26997e158b0bd64cb065f05ad2a2799, type: 3}
       propertyPath: settingsManager
       value: 
-      objectReference: {fileID: 1441286143}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b26997e158b0bd64cb065f05ad2a2799, type: 3}
 --- !u!1 &1492942200
