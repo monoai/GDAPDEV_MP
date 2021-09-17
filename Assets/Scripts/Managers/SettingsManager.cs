@@ -23,7 +23,7 @@ public class SettingsManager : MonoBehaviour
     private bool AdsFlag = true;
     private int AdsOn;
 
-    private bool AdsIsEnabled;
+    [HideInInspector] public bool AdsIsEnabled;
 
     GameObject image;
 

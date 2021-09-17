@@ -3528,7 +3528,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 375, y: -123.33333}
+  m_AnchoredPosition: {x: 375, y: -123.33331}
   m_SizeDelta: {x: 650, y: 186.66666}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &701434570
@@ -4656,6 +4656,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Menu_SFX_Back
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1395515945}
+        m_TargetAssemblyTypeName: AdsManager, Assembly-CSharp
+        m_MethodName: HideBanner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &951931490
@@ -8143,7 +8155,7 @@ PrefabInstance:
     - target: {fileID: 8767543122649281085, guid: b26997e158b0bd64cb065f05ad2a2799, type: 3}
       propertyPath: settingsManager
       value: 
-      objectReference: {fileID: 1441286143}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b26997e158b0bd64cb065f05ad2a2799, type: 3}
 --- !u!1 &1492942200

@@ -129,6 +129,10 @@ public class GameMaster : MonoBehaviour
     public void gameOver()
     {
         Debug.Log("Game Over!");
+
+        if (DataManager.data.isAdsEnabled)
+            GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowRewardedAd();
+
         gameOverUI.SetActive(true);
     }
 
@@ -136,6 +140,10 @@ public class GameMaster : MonoBehaviour
     {
         Debug.Log("Game ended!");
         DataManager.data.Money += 3;
+
+        if (DataManager.data.isAdsEnabled)
+            GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowInterstitialAd();
+
         gameWonUI.SetActive(true);
     }
 

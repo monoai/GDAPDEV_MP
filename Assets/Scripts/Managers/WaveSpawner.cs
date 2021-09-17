@@ -49,11 +49,13 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
+        /*
         if (state == SpawnState.Finished)
         {
             gm.gameEnd();
             return;
         }
+        */
         if (state == SpawnState.Waiting)
         {
             if (!enemyStillAlive())
@@ -91,6 +93,7 @@ public class WaveSpawner : MonoBehaviour
             nextWave = 0;
             Debug.Log("Completed all waves");
             state = SpawnState.Finished;
+            gm.gameEnd();
         }
         else
         {
