@@ -15,7 +15,9 @@ public class DataManager : MonoBehaviour
     public int maxHealth = 100;
     public int Money;
     public int Score;
-    public int levelsUnlocked = 1;
+    public bool Lvl2unlock;
+    public bool Lvl3unlock;
+    public bool Lvl4unlock;
 
     [Header("Player Stats")]
     public float maxFireRate = 0.5f;
@@ -41,16 +43,12 @@ public class DataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        settingsManager = GameObject.Find("SettingsManager");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            MoveSpeed = settingsManager.GetComponent<SettingsManager>().GetMoveSpeed();
-            isAdsEnabled = settingsManager.GetComponent<SettingsManager>().AdsIsEnabled;
-        }
+
     }
 }
