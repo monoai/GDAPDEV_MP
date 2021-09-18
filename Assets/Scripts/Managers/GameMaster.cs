@@ -118,7 +118,8 @@ public class GameMaster : MonoBehaviour
 
     public void gameOver()
     {
-        FindObjectOfType<AudioManager>().Play("Game_SFX_GameOver");
+        //FindObjectOfType<AudioManager>().Play("Game_SFX_GameOver");
+        AudioManager.instance.Play("Game_SFX_GameOver");
         Debug.Log("Game Over!");
 
         if (DataManager.data.isAdsEnabled)
@@ -130,7 +131,8 @@ public class GameMaster : MonoBehaviour
 
     public void gameEnd()
     {
-        FindObjectOfType<AudioManager>().Play("Game_SFX_GameWin");
+        //FindObjectOfType<AudioManager>().Play("Game_SFX_GameWin");
+        AudioManager.instance.Play("Game_SFX_GameWin");
         Debug.Log("Game ended!");
         DataManager.data.Money += tokenReward;
         DataManager.data.Score += Score;
@@ -167,7 +169,8 @@ public class GameMaster : MonoBehaviour
 
     public static void KillPlayer(Player player)
     {
-        FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerDeath");
+        //FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerDeath");
+        AudioManager.instance.Play("Game_SFX_PlayerDeath");
         Destroy(player.gameObject);
         _remainingLives -= 1;
         if (_remainingLives <= 0)

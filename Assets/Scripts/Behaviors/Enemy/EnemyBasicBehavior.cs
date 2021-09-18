@@ -50,7 +50,8 @@ public class EnemyBasicBehavior : MonoBehaviour
                     yellowBehavior();
                     break;
             }
-            FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyShoot");
+            //FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyShoot");
+            AudioManager.instance.Play("Game_SFX_EnemyShoot");
             fireRate = maxFireRate;
         }
 
@@ -61,7 +62,9 @@ public class EnemyBasicBehavior : MonoBehaviour
     {
         Vector3 targetDir = player.transform.position - transform.position;
         Quaternion rotation = Quaternion.FromToRotation(-transform.up, targetDir);
-        Instantiate(currWeapon, firePos, rotation);
+        var bullet = Instantiate(currWeapon, firePos, rotation);
+        var bulletValues = bullet.GetComponent<EnemyWeaponLogic>();
+        bulletValues.damage = gameObject.GetComponent<Enemy>().damage;
     }
 
     void blueBehavior()
@@ -76,7 +79,8 @@ public class EnemyBasicBehavior : MonoBehaviour
             if (player != null)
             {
                 //function to hurt/kill player
-                //player.DamagePlayer(10);
+                player.DamagePlayer(gameObject.GetComponent<Enemy>().damage);
+
                 Debug.Log("Player Got Laser Hit!");
             }
 
@@ -94,7 +98,9 @@ public class EnemyBasicBehavior : MonoBehaviour
 
     void yellowBehavior()
     {
-        Instantiate(currWeapon, firePos, Quaternion.identity);
+        var bullet = Instantiate(currWeapon, firePos, Quaternion.identity);
+        var bulletValues = bullet.GetComponent<EnemyWeaponLogic>();
+        bulletValues.damage = gameObject.GetComponent<Enemy>().damage;
     }
 
     void OnBecameInvisible()

@@ -21,7 +21,7 @@ public class YellowBossBehavior : MonoBehaviour
 
     [Header("Bullet Properties")]
     public float bulletSpeed;
-    public float damage;
+    //public float damage;
 
     //Hidden Calculating Variables
     private float fireRate;
@@ -77,6 +77,7 @@ public class YellowBossBehavior : MonoBehaviour
         var bullet = Instantiate(currWeapon, firePos.position, firePos.rotation);
         var bulletValues = bullet.GetComponent<EnemyWeaponLogic>();
         bulletValues.speed = bulletSpeed;
+        bulletValues.damage = gameObject.GetComponent<Enemy>().damage;
     }
 
     void OnBecameInvisible()

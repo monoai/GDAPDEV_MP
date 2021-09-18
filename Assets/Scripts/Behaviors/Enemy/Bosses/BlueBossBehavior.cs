@@ -92,7 +92,7 @@ public class BlueBossBehavior : MonoBehaviour
         if (player != null)
         {
             //function to hurt/kill player
-            player.DamagePlayer(10);
+            player.DamagePlayer(gameObject.GetComponent<Enemy>().damage);
             Debug.Log("Player Got Laser Hit!");
         }
     }

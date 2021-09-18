@@ -306,6 +306,7 @@ MonoBehaviour:
   enemyType: 0
   health: 100
   scoreWorth: 25
+  damage: 10
   hpBar: {fileID: 3885119249447890739}
   RedWeaponMultiplier: 1
   BlueWeaponMultiplier: 0.8

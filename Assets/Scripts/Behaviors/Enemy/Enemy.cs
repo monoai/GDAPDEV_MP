@@ -54,8 +54,8 @@ public class Enemy : MonoBehaviour
                 //Debug.Log("Got hit with Yellow");
                 break;
         }
-        FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyHit");
-
+        //FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyHit");
+        AudioManager.instance.Play("Game_SFX_EnemyHit");
         health -= (int)(damage * multiplier);
 
         hpBar.SetHealth(health);
@@ -68,7 +68,8 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyDeath");
+        //FindObjectOfType<AudioManager>().Play("Game_SFX_EnemyDeath");
+        AudioManager.instance.Play("Game_SFX_EnemyDeath");
         Destroy(gameObject);
         GameMaster.Score += scoreWorth;
     }

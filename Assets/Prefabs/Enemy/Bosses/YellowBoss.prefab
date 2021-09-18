@@ -402,6 +402,7 @@ MonoBehaviour:
   enemyType: 5
   health: 450
   scoreWorth: 300
+  damage: 20
   hpBar: {fileID: 1629788132688173686}
   RedWeaponMultiplier: 1
   BlueWeaponMultiplier: 0.8
@@ -426,7 +427,6 @@ MonoBehaviour:
   currWeapon: {fileID: 7481447793477149390, guid: effe989e0d7fe5e40a89ea7030099425, type: 3}
   waveSpeed: 1
   bulletSpeed: 5
-  damage: 0
 --- !u!1 &5684916632630157215
 GameObject:
   m_ObjectHideFlags: 0

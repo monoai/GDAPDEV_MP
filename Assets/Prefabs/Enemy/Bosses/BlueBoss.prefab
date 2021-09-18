@@ -742,6 +742,7 @@ MonoBehaviour:
   enemyType: 4
   health: 450
   scoreWorth: 300
+  damage: 25
   hpBar: {fileID: 4110836588927446522}
   RedWeaponMultiplier: 1
   BlueWeaponMultiplier: 0.8
