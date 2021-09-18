@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 using System;
 
 public class AdsManager : MonoBehaviour, IUnityAdsListener
@@ -50,21 +51,40 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         Advertisement.Initialize(GameID, true);
         //when testing the game, set the param to true
         //Advertisement.Initialize(GameID, false);
+        StartCoroutine(CheckInternetConnection());
     }
 
     void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            if (DataManager.data.isAdsEnabled)
+            if (PlayerPrefs.GetInt("AdsIsEnabled", 1) == 1)
             {
                 if (flag)
                 {
-                    flag = false;
+                    Debug.Log("BannerShowing");
                     ShowBanner();
+                    flag = false;
                 }
             }
             else HideBanner();
+        }
+        StartCoroutine(CheckInternetConnection());
+    }
+
+    IEnumerator CheckInternetConnection()
+    {
+        UnityWebRequest request = new UnityWebRequest("https://www.google.com/");
+
+        yield return request.SendWebRequest();
+
+        if (request.error != null)
+        {
+            PlayerPrefs.SetInt("InternetCheck", 0);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("InternetCheck", 1);
         }
     }
 
@@ -88,6 +108,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     public void ShowBanner()
     {
         //Start courotine here
+        Debug.Log("BannerShowing");
         isBannerActive = true;
         StartCoroutine(ShowBannerRoutine());
     }
@@ -100,6 +121,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         {
             Advertisement.Banner.Hide();
             isBannerActive = false;
+            Debug.Log("Banner Hidden");
         }
     }
 
@@ -119,9 +141,10 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
             yield return new WaitForSeconds(0.5f);
         }
 
-        Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_LEFT);
+        Advertisement.Banner.SetPosition(BannerPosition.TOP_LEFT);
         //Show the banner ad
         Advertisement.Banner.Show(SampleBanner);
+        Debug.Log("Banner Shown");
     }
 
     public void ShowRewardedAd()

@@ -24,7 +24,6 @@ public class DataManager : MonoBehaviour
     public int maxDamage = 10;
 
     public float MoveSpeed = 1;
-    public bool isAdsEnabled;
 
     void Awake()
     {
