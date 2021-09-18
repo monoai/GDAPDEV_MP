@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
 
     [Header("Weapon Information")]
     public weaponTypeEnum weaponType;
-    public enum weaponTypeEnum {Red, Blue, Yellow};
+    public enum weaponTypeEnum { Red, Blue, Yellow };
     public int damage;
 
     void Start()
@@ -34,16 +34,22 @@ public class Weapon : MonoBehaviour
     {
         //First checks if your weapon is currently the laser which will enable
         //the lineRenderer, else dont.
-        if(weaponType == weaponTypeEnum.Blue) {
+        if (weaponType == weaponTypeEnum.Blue)
+        {
             laserLine.enabled = true;
-        } else {
+        }
+        else
+        {
             laserLine.enabled = false;
         }
 
-        if(stats.fireRate < 0.0 && weaponType != weaponTypeEnum.Blue) {
+        if (stats.fireRate < 0.0 && weaponType != weaponTypeEnum.Blue)
+        {
             Shoot();
             stats.fireRate = stats.maxFireRate;
-        } else if (stats.fireRate < 0.0 && weaponType == weaponTypeEnum.Blue) {
+        }
+        else if (stats.fireRate < 0.0 && weaponType == weaponTypeEnum.Blue)
+        {
             //something special for the laser One
             laserShoot();
             stats.fireRate = stats.maxFireRate;
@@ -56,15 +62,22 @@ public class Weapon : MonoBehaviour
     void Shoot()
     {
         //Debug.Log("Shooting!" + "Bullet Type:" + this.bulletType);
+        //FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerShoot");
+        AudioManager.instance.Play("Game_SFX_PlayerShoot");
         Instantiate(currWeapon, firePoint.position, firePoint.rotation);
     }
 
-    void laserShoot() {
+    void laserShoot()
+    {
+        //FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerShoot");
+        AudioManager.instance.Play("Game_SFX_PlayerShoot");
         RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.up);
-        if(hitInfo) {
+        if (hitInfo)
+        {
             Debug.Log("Laser Hit: " + hitInfo.transform.name);
             Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
-            if(enemy != null) {
+            if (enemy != null)
+            {
                 enemy.TakeDamage(damage, weaponType);
             }
 
@@ -72,7 +85,9 @@ public class Weapon : MonoBehaviour
             laserLine.SetPosition(0, firePoint.localPosition);
             Vector3 hitPos = firePoint.InverseTransformPoint(hitInfo.point);
             laserLine.SetPosition(1, hitPos);
-        } else {
+        }
+        else
+        {
             laserLine.SetPosition(0, firePoint.localPosition);
             laserLine.SetPosition(1, firePoint.localPosition + firePoint.up * 10);
         }

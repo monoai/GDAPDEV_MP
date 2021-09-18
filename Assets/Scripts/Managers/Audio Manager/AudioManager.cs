@@ -1,11 +1,12 @@
+using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
-
 
     public static AudioManager instance;
 
@@ -36,7 +37,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-       Play("BGM");
+        Play("BGM");
     }
 
     public void Play(string name)
@@ -47,6 +48,6 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound file '" + name + "' not found!!");
             return;
         }
-        s.source.Play();
+        s.source.Play();    
     }
 }

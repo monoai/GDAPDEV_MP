@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
 
     public static GameMaster gm;
 
-    void Awake() {
+    void Awake()
+    {
         //screenSize = new Vector3(Screen.height, Screen.width, 0);
-        if(gm == null) {
+        if (gm == null)
+        {
             gm = this;
-        } else if (gm != this) {
+        }
+        else if (gm != this)
+        {
             Destroy(gameObject);
         }
 
@@ -24,26 +29,12 @@ public class GameMaster : MonoBehaviour
 
     [Header("Spawn Information")]
     public int spawnDelay;
-    //-----------------
-    public Transform spawnPoint;
-    /*
-    This is a temporary variable
-    Better approach should probably be calculating the screen's DPI
-    then getting the position from there to make it adaptable
-    instead of uncertainly just dropping the point somewhere
-    which wouldn't adapt on multiple screen resolutions
-    */
-
-    //-----Work-in-progress Screen Position calculation;
-    //public Vector3 screenSize;
-    //public Vector3 spawnPos;
-    //public Quaternion rotation;
-    //-----------------
 
     [SerializeField]
     [Header("Player Resources")]
     private static int _remainingLives;
-    public static int RemainingLives {
+    public static int RemainingLives
+    {
         get { return _remainingLives; }
     }
 
@@ -56,65 +47,200 @@ public class GameMaster : MonoBehaviour
     private GameObject gameOverUI;
     [SerializeField]
     private GameObject gameWonUI;
+    [SerializeField]
+    private GameObject bgImage;
+    [Range(-1f, 1f)]
+    public float bgScrollSpeed = 0.5f;
+    private float bgOffset;
+    private Material bgMat;
 
-    //For counting purposes
-    private float timeInterval = 1f;
+    public enum levelLocked { None, Lvl2, Lvl3, Lvl4 };
+    [Header("Current Level Settings")]
+    public levelLocked levelToUnlock = levelLocked.None;
+    public int tokenReward = 3;
 
+    //Other things to load
     private WaveSpawner waveSpawn;
 
-    void Start() {
+    private int currWeapon = 1;
+
+    private Weapon weapon;
+
+    float nextTimeToSearch = 0;
+
+    //Control Type variables
+    [HideInInspector] public enum ControlTypes { A, B };
+    [HideInInspector] public ControlTypes controlType = ControlTypes.A;
+    public GameObject JoystickObject;
+
+    void Start()
+    {
+        GameObject.Find("NotifsManager").GetComponent<NotificationsManager>().SendSimpleNotif();
+        applySettings();
+        weapon = GameObject.FindGameObjectWithTag("Player").GetComponent<Weapon>();
         waveSpawn = GetComponent<WaveSpawner>();
         _remainingLives = DataManager.data.maxLives;
+        startingScore = DataManager.data.Score;
         Score = startingScore;
+        bgMat = bgImage.GetComponent<Image>().material;
     }
 
-    void Update() {
-        timeInterval -= Time.deltaTime;
-        if(timeInterval <= 0f) {
-            timeInterval = 1f;
-            if(validScene()) {
-                waveSpawn.enabled = true;
-            } else {
-                waveSpawn.enabled = false;
-            }
+    void Update()
+    {
+        if (bgMat == null)
+        {
+            bgMat = bgImage.GetComponent<Image>().material;
+        }
+        bgOffset += (Time.deltaTime * bgScrollSpeed) / 10f;
+        bgMat.SetTextureOffset("_MainTex", new Vector2(0, bgOffset));
+        Screen.orientation = ScreenOrientation.Portrait;
+    }
+
+    void applySettings()
+    {
+        //[Apply ControlType setting]
+        controlType = (ControlTypes)PlayerPrefs.GetInt("ControlType", 1);
+
+        GestureManager.Instance.controlType = controlType;
+        if (controlType == ControlTypes.A)
+        {
+            JoystickObject.SetActive(true);
+        }
+        else
+        {
+            JoystickObject.SetActive(false);
         }
     }
 
-    bool validScene() {
+    bool validScene()
+    {
         Scene scene = SceneManager.GetActiveScene();
-        if(scene.name != "Lobby Scene" && scene.name != "Main Menu") {
+        if (scene.name != "Lobby Scene" && scene.name != "Main Menu")
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
     public void gameOver()
     {
+        AudioManager.instance.Play("Game_SFX_GameOver");
         Debug.Log("Game Over!");
+
+        if (PlayerPrefs.GetInt("AdsIsEnabled", 1) == 1)
+            FindObjectOfType<AdsManager>().ShowRewardedAd();
+
         gameOverUI.SetActive(true);
     }
 
-    public void gameEnd(){
+    public void gameEnd()
+    {
+        AudioManager.instance.Play("Game_SFX_GameWin");
         Debug.Log("Game ended!");
-        DataManager.data.Money += 3;
+        DataManager.data.Money += tokenReward;
+        DataManager.data.Score += Score;
+        switch (levelToUnlock)
+        {
+            case levelLocked.Lvl2:
+                DataManager.data.Lvl2unlock = true;
+                break;
+            case levelLocked.Lvl3:
+                DataManager.data.Lvl3unlock = true;
+                break;
+            case levelLocked.Lvl4:
+                DataManager.data.Lvl4unlock = true;
+                break;
+            default:
+                Debug.Log("No Level got unlocked");
+                break;
+        }
+
+        if (PlayerPrefs.GetInt("AdsIsEnabled", 1) == 1)
+            FindObjectOfType<AdsManager>().ShowInterstitialAd();
+
         gameWonUI.SetActive(true);
     }
 
-    public IEnumerator RespawnPlayer() {
+    public IEnumerator RespawnPlayer()
+    {
         yield return new WaitForSeconds(spawnDelay);
         //Instantiate(playerPrefab, (screenSize - spawnPos), rotation);
-        Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+        var newPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.25f, 0.0f));
+        Instantiate(playerPrefab, newPos, Quaternion.identity);
     }
 
-    public static void KillPlayer (Player player) {
-        Destroy (player.gameObject);
+    public static void KillPlayer(Player player)
+    {
+        AudioManager.instance.Play("Game_SFX_PlayerDeath");
+        Destroy(player.gameObject);
         _remainingLives -= 1;
-        if(_remainingLives <= 0) {
+        if (_remainingLives <= 0)
+        {
             gm.gameOver();
-        } else {
+        }
+        else
+        {
             gm.StartCoroutine(gm.RespawnPlayer());
         }
+    }
+
+    public void changeWeapon(int choice)
+    {
+
+        currWeapon = currWeapon + choice;
+        if (currWeapon > 3)
+        {
+            currWeapon = 1;
+        }
+        else if (currWeapon < 1)
+        {
+            currWeapon = 3;
+        }
+        Debug.Log(currWeapon);
+        switch (currWeapon)
+        {
+            case 1:
+                weapon.currWeapon = weapon.bulletPrefab;
+                weapon.weaponType = Weapon.weaponTypeEnum.Red;
+                Debug.Log("Weapon is now: " + weapon.weaponType);
+                break;
+            case 2:
+                weapon.currWeapon = null;
+                weapon.weaponType = Weapon.weaponTypeEnum.Blue;
+                Debug.Log("Weapon is now: " + weapon.weaponType);
+                break;
+            case 3:
+                weapon.currWeapon = weapon.wavePrefab;
+                weapon.weaponType = Weapon.weaponTypeEnum.Yellow;
+                Debug.Log("Weapon is now: " + weapon.weaponType);
+                break;
+        }
+    }
+
+    public void testSpawn(Vector3 position)
+    {
+        var viewPos = Camera.main.ViewportToWorldPoint(position);
+
+        Debug.Log("Spawning at: " + viewPos);
+    }
+
+    public GameObject findPlayer()
+    {
+        if (nextTimeToSearch <= Time.time)
+        {
+            GameObject searchResult = GameObject.FindGameObjectWithTag("Player");
+            if (searchResult != null)
+            {
+                return searchResult;
+            }
+            nextTimeToSearch = Time.time + 0.5f;
+        }
+
+        Debug.Log("Cant find player!");
+        return null;
     }
 
     /* If we ever need to kill enemies through the GM instead

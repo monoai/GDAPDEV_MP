@@ -35,6 +35,21 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadLevel(2));
     }
 
+    public void LoadLevelTwo()
+    {
+        StartCoroutine(LoadLevel(3));
+    }
+
+    public void LoadLevelThree()
+    {
+        StartCoroutine(LoadLevel(4));
+    }
+
+    public void LoadLevelFour()
+    {
+        StartCoroutine(LoadLevel(5));
+    }
+
     public void LoadNextLevel()
     {
         if (SceneManager.GetActiveScene().buildIndex != SceneManager.GetAllScenes().Length)
@@ -54,5 +69,10 @@ public class SceneLoader : MonoBehaviour
 
         //Load Scene
         SceneManager.LoadScene(levelIndex);
+    }
+
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 }

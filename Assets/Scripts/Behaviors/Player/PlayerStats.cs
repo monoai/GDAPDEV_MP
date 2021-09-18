@@ -9,11 +9,13 @@ public class PlayerStats : MonoBehaviour
     private int _curHealth;
     public int curHealth
     {
-        get {
+        get
+        {
             return _curHealth;
         }
-        set {
-            _curHealth = Mathf.Clamp(value, 0 , maxHealth);
+        set
+        {
+            _curHealth = Mathf.Clamp(value, 0, maxHealth);
         }
     }
 
@@ -22,13 +24,30 @@ public class PlayerStats : MonoBehaviour
 
     public int maxDamage;
 
-    void Awake() {
-        if(instance == null) {
+    //Should only be from 0.4f to 2.0f
+    //Replace with something more elegant once the settings can refine the movement speed.
+    //Implement with range steps of 25.0f?
+    [Range(0.4f, 2.0f)]
+    public float moveSpeedPercent;
+    public float moveSpeedCompensator;
+    public float verticalCompensator;
+    public float joystickCompensator;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
             instance = this;
         }
         maxHealth = DataManager.data.maxHealth;
         maxFireRate = DataManager.data.maxFireRate;
         maxDamage = DataManager.data.maxDamage;
+        moveSpeedPercent = DataManager.data.MoveSpeed;
+    }
+
+    void Update()
+    {
+
     }
 
 }
