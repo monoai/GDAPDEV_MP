@@ -72,6 +72,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         StartCoroutine(CheckInternetConnection());
     }
 
+
     IEnumerator CheckInternetConnection()
     {
         UnityWebRequest request = new UnityWebRequest("https://www.google.com/");

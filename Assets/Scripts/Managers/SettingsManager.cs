@@ -42,6 +42,10 @@ public class SettingsManager : MonoBehaviour
 
     void Start()
     {
+        if (AudioManager.instance.gameObject.activeInHierarchy)
+        {
+            audioManager = AudioManager.instance;
+        }
         savedControlType = PlayerPrefs.GetInt("ControlType", 0);
 
         CTflag = true;
@@ -80,7 +84,7 @@ public class SettingsManager : MonoBehaviour
         Color color = image.GetComponent<Image>().color;
         int save;
 
-        int CheckNet = PlayerPrefs.GetInt("InternetCheck", 0);
+        int CheckNet = PlayerPrefs.GetInt("InternetCheck", 1);
 
         if (AdsFlag)
         {
@@ -90,6 +94,7 @@ public class SettingsManager : MonoBehaviour
                 image.GetComponent<Image>().color = color;
                 toggle.GetComponent<Toggle>().isOn = true;
                 AdsIsEnabled = true;
+                PlayerPrefs.SetInt("AdsIsEnabled", 1);
             }
             else
             {
@@ -97,6 +102,7 @@ public class SettingsManager : MonoBehaviour
                 image.GetComponent<Image>().color = color;
                 toggle.GetComponent<Toggle>().isOn = false;
                 AdsIsEnabled = false;
+                PlayerPrefs.SetInt("AdsIsEnabled", 0);
             }
 
             AdsFlag = false;
@@ -108,6 +114,7 @@ public class SettingsManager : MonoBehaviour
                 color.a = 0.0f;
                 image.GetComponent<Image>().color = color;
                 AdsIsEnabled = true;
+                PlayerPrefs.SetInt("AdsIsEnabled", 1);
                 save = 0;
             }
             else
@@ -115,13 +122,11 @@ public class SettingsManager : MonoBehaviour
                 color.a = 1.0f;
                 image.GetComponent<Image>().color = color;
                 AdsIsEnabled = false;
+                PlayerPrefs.SetInt("AdsIsEnabled", 0);
                 save = 1;
             }
             PlayerPrefs.SetInt("AdsOn", save);
         }
-
-        if (AdsIsEnabled) PlayerPrefs.SetInt("AdsIsEnabled", 1);
-        else PlayerPrefs.SetInt("AdsIsEnabled", 0);
     }
 
     public void SetControlType(GameObject toggle)
