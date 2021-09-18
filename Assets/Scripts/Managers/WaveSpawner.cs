@@ -49,6 +49,10 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
+        if (state == SpawnState.Finished)
+        {
+            return;
+        }
         if (state == SpawnState.Waiting)
         {
             if (!enemyStillAlive())
