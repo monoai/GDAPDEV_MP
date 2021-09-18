@@ -15,16 +15,33 @@ public class LeaderboardHandler : MonoBehaviour
     }
 
     public GameObject score;
+    public Transform leaderboards;
+    public Text postResult;
 
-    void Awake()
+    public void _deleteScores()
+    {
+        foreach (Transform scores in leaderboards)
+        {
+            Destroy(scores.gameObject);
+        }
+    }
+
+    public void _getScore()
     {
         StartCoroutine(GetPlayers());
     }
 
     public void _postScore(InputField receivedname)
     {
-        Debug.Log("PostingScore");
-        StartCoroutine(PostScore(receivedname.text));
+        if (DataManager.data.gameObject.activeInHierarchy == true)
+        {
+            Debug.Log("PostingScore");
+            StartCoroutine(PostScore(receivedname.text));
+        }
+        else
+        {
+            Debug.Log("Score failed to post, where's the data?!");
+        }
     }
 
     IEnumerator GetPlayers()
@@ -48,7 +65,7 @@ public class LeaderboardHandler : MonoBehaviour
             foreach (Dictionary<string, string> player in playerListRaw)
             {
                 Debug.Log($"Got player: {player["user_name"]}");
-                var scoreTxt = Instantiate(score, this.transform);
+                var scoreTxt = Instantiate(score, leaderboards);
                 var scoreValue = scoreTxt.GetComponent<LeaderboardUIHandler>();
                 scoreValue.nameTxt = player["user_name"];
                 scoreValue.scoreTxt = player["score"];
@@ -57,7 +74,7 @@ public class LeaderboardHandler : MonoBehaviour
         else
         {
             Debug.Log($"Error: {request.error}");
-            var scoreTxt = Instantiate(score, this.transform);
+            var scoreTxt = Instantiate(score, leaderboards);
             var scoreValue = scoreTxt.GetComponent<LeaderboardUIHandler>();
             scoreValue.nameTxt = "404 ERROR: ";
             scoreValue.scoreTxt = "Leaderboards not received";
@@ -87,11 +104,28 @@ public class LeaderboardHandler : MonoBehaviour
         if (string.IsNullOrEmpty(request.error))
         {
             Debug.Log($"Created Player: {request.downloadHandler.text}");
+            postResult.text = "Score has been submitted successfully!";
+            postResult.color = Color.green;
+
+            yield return new WaitForSeconds(2);
+
+            postResult.text = "";
         }
         else
         {
             Debug.Log($"Error: {request.error}");
+            postResult.text = "Score failed to submit, no internet connection detected";
+            postResult.color = Color.red;
+
+            yield return new WaitForSeconds(2);
+
+            postResult.text = "";
         }
+    }
+
+    void Awake()
+    {
+
     }
 
     // Start is called before the first frame update
