@@ -134,7 +134,8 @@ public class GameMaster : MonoBehaviour
         Debug.Log("Game Over!");
 
         if (DataManager.data.isAdsEnabled)
-            GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowRewardedAd();
+            FindObjectOfType<AdsManager>().ShowRewardedAd();
+            //GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowRewardedAd();
 
         gameOverUI.SetActive(true);
     }
@@ -147,7 +148,8 @@ public class GameMaster : MonoBehaviour
         DataManager.data.Score += Score;
 
         if (DataManager.data.isAdsEnabled)
-            GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowInterstitialAd();
+            FindObjectOfType<AdsManager>().ShowInterstitialAd();
+            //GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowInterstitialAd();
 
         gameWonUI.SetActive(true);
     }

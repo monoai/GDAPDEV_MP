@@ -129,7 +129,7 @@ MonoBehaviour:
   enemyType: 3
   health: 450
   scoreWorth: 300
-  hpBar: {fileID: 0}
+  hpBar: {fileID: 2106050699201871747}
   RedWeaponMultiplier: 1
   BlueWeaponMultiplier: 0.8
   YellowWeaponMultiplier: 0.5

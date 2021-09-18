@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 
     public int health = 100;
     public int scoreWorth;
+    public int damage = 10;
     public HealthBar hpBar;
 
     void Start()

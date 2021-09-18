@@ -55,7 +55,8 @@ public class WaveSpawner : MonoBehaviour
             {
                 Debug.Log("Wave Completed");
                 waveCompleted();
-                GameObject.Find("NotifsManager").GetComponent<NotificationsManager>().SendSimpleNotif();
+                FindObjectOfType<NotificationsManager>().SendSimpleNotif();
+                //GameObject.Find("NotifsManager").GetComponent<NotificationsManager>().SendSimpleNotif();
                 return;
             }
             else
