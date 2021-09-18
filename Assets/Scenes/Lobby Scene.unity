@@ -572,7 +572,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 140588684}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadLevelOne
+        m_MethodName: LoadLevelFour
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1331,7 +1331,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 325652048}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadLevelOne
+        m_MethodName: LoadLevelTwo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2657,6 +2657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lvl2: {fileID: 325652046}
   Lvl3: {fileID: 1137629920}
+  Lvl4: {fileID: 140588682}
 --- !u!4 &725000655
 Transform:
   m_ObjectHideFlags: 0
@@ -3649,7 +3650,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1137629922}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadLevelOne
+        m_MethodName: LoadLevelThree
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

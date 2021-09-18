@@ -47,8 +47,10 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private GameObject gameWonUI;
 
-    //For counting purposes
-    private float timeInterval = 1f;
+    public enum levelLocked { None, Lvl2, Lvl3, Lvl4 };
+    [Header("Current Level Settings")]
+    public levelLocked levelToUnlock = levelLocked.None;
+    public int tokenReward = 3;
 
     //Other things to load
     private WaveSpawner waveSpawn;
@@ -77,21 +79,7 @@ public class GameMaster : MonoBehaviour
 
     void Update()
     {
-        /*
-        timeInterval -= Time.deltaTime;
-        if (timeInterval <= 0f)
-        {
-            timeInterval = 1f;
-            if (validScene())
-            {
-                waveSpawn.enabled = true;
-            }
-            else
-            {
-                waveSpawn.enabled = false;
-            }
-        }
-        */
+
     }
 
     void applySettings()
@@ -143,8 +131,23 @@ public class GameMaster : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("Game_SFX_GameWin");
         Debug.Log("Game ended!");
-        DataManager.data.Money += 3;
+        DataManager.data.Money += tokenReward;
         DataManager.data.Score += Score;
+        switch (levelToUnlock)
+        {
+            case levelLocked.Lvl2:
+                DataManager.data.Lvl2unlock = true;
+                break;
+            case levelLocked.Lvl3:
+                DataManager.data.Lvl3unlock = true;
+                break;
+            case levelLocked.Lvl4:
+                DataManager.data.Lvl4unlock = true;
+                break;
+            default:
+                Debug.Log("No Level got unlocked");
+                break;
+        }
 
         if (DataManager.data.isAdsEnabled)
             GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowInterstitialAd();
