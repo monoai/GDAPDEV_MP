@@ -43,7 +43,6 @@ public class SettingsManager : MonoBehaviour
     void Start()
     {
         savedControlType = PlayerPrefs.GetInt("ControlType", 0);
-        Debug.Log(savedControlType);
 
         CTflag = true;
         BGMflag = true;
@@ -61,8 +60,6 @@ public class SettingsManager : MonoBehaviour
         SetMovementSpeed(MoveSpeed.GetComponent<Slider>());
         MuteAudio(MuteToggle);
         SetAds(AdsToggle);
-
-        Debug.Log("Start End");
     }
 
     void Update()
@@ -83,28 +80,30 @@ public class SettingsManager : MonoBehaviour
         Color color = image.GetComponent<Image>().color;
         int save;
 
+        int CheckNet = PlayerPrefs.GetInt("InternetCheck", 0);
+
         if (AdsFlag)
         {
-            if (AdsOn == 1)
-            {
-                color.a = 1.0f;
-                image.GetComponent<Image>().color = color;
-                toggle.GetComponent<Toggle>().isOn = false;
-                AdsIsEnabled = false;
-            }
-            else
+            if (AdsOn == 0 && CheckNet == 1)
             {
                 color.a = 0.0f;
                 image.GetComponent<Image>().color = color;
                 toggle.GetComponent<Toggle>().isOn = true;
                 AdsIsEnabled = true;
             }
+            else
+            {
+                color.a = 1.0f;
+                image.GetComponent<Image>().color = color;
+                toggle.GetComponent<Toggle>().isOn = false;
+                AdsIsEnabled = false;
+            }
 
             AdsFlag = false;
         }
         else
         {
-            if (toggle.GetComponent<Toggle>().isOn)
+            if (toggle.GetComponent<Toggle>().isOn && CheckNet == 1)
             {
                 color.a = 0.0f;
                 image.GetComponent<Image>().color = color;
@@ -120,6 +119,9 @@ public class SettingsManager : MonoBehaviour
             }
             PlayerPrefs.SetInt("AdsOn", save);
         }
+
+        if (AdsIsEnabled) PlayerPrefs.SetInt("AdsIsEnabled", 1);
+        else PlayerPrefs.SetInt("AdsIsEnabled", 0);
     }
 
     public void SetControlType(GameObject toggle)
@@ -230,7 +232,6 @@ public class SettingsManager : MonoBehaviour
     public void SetMovementSpeed(Slider slider)
     {
         float MovementSpeed = PlayerPrefs.GetFloat("MovementSpeed", 1.0f);
-        Debug.Log(MovementSpeed);
 
         if (MSflag)
         {

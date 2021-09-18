@@ -99,13 +99,8 @@ public class GameMaster : MonoBehaviour
     void applySettings()
     {
         //[Apply ControlType setting]
-
-        // The default value (2nd param) just assigns a value just in case there is no saved playerpref value
-        // i.e. For the very first run after playerprefs implementation. Default value is useless after that
         controlType = (ControlTypes)PlayerPrefs.GetInt("ControlType", 1);
 
-        //controlType = (ControlTypes)1;
-        //Debug.Log("Control type is: " + controlType);
         GestureManager.Instance.controlType = controlType;
         if (controlType == ControlTypes.A)
         {
@@ -132,20 +127,17 @@ public class GameMaster : MonoBehaviour
 
     public void gameOver()
     {
-        //FindObjectOfType<AudioManager>().Play("Game_SFX_GameOver");
         AudioManager.instance.Play("Game_SFX_GameOver");
         Debug.Log("Game Over!");
 
-        if (DataManager.data.isAdsEnabled)
+        if (PlayerPrefs.GetInt("AdsIsEnabled", 1) == 1)
             FindObjectOfType<AdsManager>().ShowRewardedAd();
-        //GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowRewardedAd();
 
         gameOverUI.SetActive(true);
     }
 
     public void gameEnd()
     {
-        //FindObjectOfType<AudioManager>().Play("Game_SFX_GameWin");
         AudioManager.instance.Play("Game_SFX_GameWin");
         Debug.Log("Game ended!");
         DataManager.data.Money += tokenReward;
@@ -166,9 +158,8 @@ public class GameMaster : MonoBehaviour
                 break;
         }
 
-        if (DataManager.data.isAdsEnabled)
+        if (PlayerPrefs.GetInt("AdsIsEnabled", 1) == 1)
             FindObjectOfType<AdsManager>().ShowInterstitialAd();
-        //GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowInterstitialAd();
 
         gameWonUI.SetActive(true);
     }
@@ -183,7 +174,6 @@ public class GameMaster : MonoBehaviour
 
     public static void KillPlayer(Player player)
     {
-        //FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerDeath");
         AudioManager.instance.Play("Game_SFX_PlayerDeath");
         Destroy(player.gameObject);
         _remainingLives -= 1;
