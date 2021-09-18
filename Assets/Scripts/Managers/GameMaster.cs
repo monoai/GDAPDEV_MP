@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
@@ -46,6 +47,12 @@ public class GameMaster : MonoBehaviour
     private GameObject gameOverUI;
     [SerializeField]
     private GameObject gameWonUI;
+    [SerializeField]
+    private GameObject bgImage;
+    [Range(-1f, 1f)]
+    public float bgScrollSpeed = 0.5f;
+    private float bgOffset;
+    private Material bgMat;
 
     public enum levelLocked { None, Lvl2, Lvl3, Lvl4 };
     [Header("Current Level Settings")]
@@ -75,11 +82,17 @@ public class GameMaster : MonoBehaviour
         _remainingLives = DataManager.data.maxLives;
         startingScore = DataManager.data.Score;
         Score = startingScore;
+        bgMat = bgImage.GetComponent<Image>().material;
     }
 
     void Update()
     {
-
+        if (bgMat == null)
+        {
+            bgMat = bgImage.GetComponent<Image>().material;
+        }
+        bgOffset += (Time.deltaTime * bgScrollSpeed) / 10f;
+        bgMat.SetTextureOffset("_MainTex", new Vector2(0, bgOffset));
     }
 
     void applySettings()
@@ -124,7 +137,7 @@ public class GameMaster : MonoBehaviour
 
         if (DataManager.data.isAdsEnabled)
             FindObjectOfType<AdsManager>().ShowRewardedAd();
-            //GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowRewardedAd();
+        //GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowRewardedAd();
 
         gameOverUI.SetActive(true);
     }
@@ -154,7 +167,7 @@ public class GameMaster : MonoBehaviour
 
         if (DataManager.data.isAdsEnabled)
             FindObjectOfType<AdsManager>().ShowInterstitialAd();
-            //GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowInterstitialAd();
+        //GameObject.Find("AdsManager").GetComponent<AdsManager>().ShowInterstitialAd();
 
         gameWonUI.SetActive(true);
     }
