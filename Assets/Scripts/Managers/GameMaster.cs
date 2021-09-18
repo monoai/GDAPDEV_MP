@@ -93,6 +93,7 @@ public class GameMaster : MonoBehaviour
         }
         bgOffset += (Time.deltaTime * bgScrollSpeed) / 10f;
         bgMat.SetTextureOffset("_MainTex", new Vector2(0, bgOffset));
+        Screen.orientation = ScreenOrientation.Portrait;
     }
 
     void applySettings()
