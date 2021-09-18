@@ -15,11 +15,15 @@ public class Player : MonoBehaviour
     public float yMinClamp;
     public float yMaxClamp;
 
+    private Animator playerAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
-        //FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerSpawn");
+        playerAnimator = gameObject.GetComponent<Animator>();
+
         AudioManager.instance.Play("Game_SFX_PlayerSpawn");
+        playerAnimator.SetInteger("Anims", 2);
         stats = PlayerStats.instance;
 
         stats.curHealth = stats.maxHealth;
@@ -41,13 +45,30 @@ public class Player : MonoBehaviour
 
     public void DamagePlayer(int damage)
     {
-        //FindObjectOfType<AudioManager>().Play("Game_SFX_PlayerHit");
         AudioManager.instance.Play("Game_SFX_PlayerHit");
+        StartCoroutine(playerHit());
         stats.curHealth -= damage;
         hpBar.GetComponent<HealthBar>().SetHealth(stats.curHealth);
         if (stats.curHealth <= 0)
         {
+            StartCoroutine(playerDeath());
             GameMaster.KillPlayer(this);
         }
+    }
+
+    IEnumerator playerHit()
+    {
+        playerAnimator.SetInteger("Anims", 1);
+
+        yield return new WaitForSeconds(1);
+
+        playerAnimator.SetInteger("Anims", 0);
+    }
+
+    IEnumerator playerDeath()
+    {
+        playerAnimator.SetInteger("Anims", 3);
+
+        yield return new WaitForSeconds(3);
     }
 }

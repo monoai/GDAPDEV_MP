@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 1516885454333362277}
   - component: {fileID: 1883194063452661303}
   - component: {fileID: 1516885454333362276}
+  - component: {fileID: 2884234691002794301}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -298,6 +299,25 @@ MonoBehaviour:
   wavePrefab: {fileID: 8713975212275721214, guid: 83aa4a889b62ad848a138f096f71779a, type: 3}
   weaponType: 0
   damage: 10
+--- !u!95 &2884234691002794301
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516885454333362281}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5d0c3b49c25aac64bb4f99490185ea4e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1516885455687872212
 GameObject:
   m_ObjectHideFlags: 0
